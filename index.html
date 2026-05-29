@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Volery Portfolio Mapping - Master Lifecycle Visual</title>
+<title>Portfolio Visuals - Fund, Company, Roles, Meetings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root {
-    --bg: #fafaf7;
+    --bg: #fbfaf6;
     --panel: #ffffff;
     --ink: #171717;
     --muted: #66645f;
     --line: #dedbd2;
-    --line-dark: #b8b2a7;
     --accent: #d97706;
     --accent-dark: #92400e;
     --accent-soft: #fef3c7;
@@ -25,12 +24,14 @@
     --angel-ink: #9a3412;
     --founder: #ede9fe;
     --founder-ink: #5b21b6;
-    --signal: #fee2e2;
-    --signal-ink: #991b1b;
     --reader: #d1fae5;
     --reader-ink: #065f46;
-    --feeder: #e0f2fe;
-    --feeder-ink: #0c4a6e;
+    --signal: #fee2e2;
+    --signal-ink: #991b1b;
+    --meeting: #fce7f3;
+    --meeting-ink: #9d174d;
+    --data: #f8fafc;
+    --data-ink: #334155;
     --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
   }
@@ -47,27 +48,27 @@
   header {
     background: var(--panel);
     border-bottom: 1px solid var(--line);
-    padding: 30px 40px 22px;
+    padding: 28px 40px 22px;
     position: sticky;
     top: 0;
     z-index: 10;
   }
-  header h1 {
-    margin: 0;
+  h1 {
     font-size: 30px;
     letter-spacing: -0.03em;
+    margin: 0;
   }
   header p {
     color: var(--muted);
     font-size: 14px;
     margin: 8px 0 0;
-    max-width: 1060px;
+    max-width: 1120px;
   }
   nav {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 18px;
+    margin-top: 16px;
   }
   nav a {
     background: #fffdf7;
@@ -80,27 +81,22 @@
     text-decoration: none;
     text-transform: uppercase;
   }
-  nav a:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-  }
-
   main {
     margin: 0 auto;
     max-width: 1680px;
-    padding: 34px 40px 54px;
+    padding: 34px 40px 56px;
   }
-  section { margin-bottom: 58px; }
-  section > h2 {
+  section { margin-bottom: 54px; }
+  h2 {
     font-size: 22px;
     letter-spacing: -0.02em;
     margin: 0 0 6px;
   }
-  section > p.lead {
+  .lead {
     color: var(--muted);
     font-size: 13px;
-    margin: 0 0 20px;
-    max-width: 980px;
+    margin: 0 0 18px;
+    max-width: 1080px;
   }
   code {
     background: var(--accent-soft);
@@ -115,61 +111,45 @@
     overflow: auto;
     padding: 24px;
   }
-  .diagram-wrap.compact { padding: 18px; }
   .diagram-wrap .mermaid { min-width: 980px; }
-  .note {
-    border-left: 4px solid var(--accent);
-    color: var(--muted);
-    font-size: 13px;
-    margin: 14px 0 0;
-    max-width: 1120px;
-    padding: 8px 12px;
-  }
-  .stat-row {
+  .stats {
     display: grid;
     gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-bottom: 18px;
   }
-  .stat {
+  .stat, .card {
     background: var(--panel);
     border: 1px solid var(--line);
     padding: 14px;
   }
   .stat b {
     display: block;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1;
     margin-bottom: 8px;
   }
-  .stat span {
+  .stat span, .card p {
     color: var(--muted);
     display: block;
     font-size: 12px;
+    margin: 0;
   }
   .grid {
     display: grid;
     gap: 14px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-top: 16px;
   }
   .wide-grid {
     display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  }
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    padding: 16px;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    margin-top: 16px;
   }
   .card h3 {
-    font-size: 16px;
+    font-size: 15px;
     margin: 8px 0 8px;
-  }
-  .card p {
-    color: var(--muted);
-    font-size: 12px;
-    margin: 0 0 10px;
   }
   .tag {
     display: inline-block;
@@ -179,25 +159,15 @@
     padding: 3px 7px;
     text-transform: uppercase;
   }
-  .tag.gp { background: var(--gp); color: var(--gp-ink); }
-  .tag.analyst { background: var(--analyst); color: var(--analyst-ink); }
-  .tag.lp { background: var(--lp); color: var(--lp-ink); }
-  .tag.angel { background: var(--angel); color: var(--angel-ink); }
-  .tag.founder { background: var(--founder); color: var(--founder-ink); }
-  .tag.signal { background: var(--signal); color: var(--signal-ink); }
-  .route {
-    color: var(--accent-dark);
-    font-family: var(--mono);
-    font-size: 11px;
-    margin-bottom: 8px;
-    word-break: break-word;
-  }
-  ul {
-    font-size: 13px;
-    margin: 8px 0 0;
-    padding-left: 18px;
-  }
-  li { margin: 4px 0; }
+  .gp { background: var(--gp); color: var(--gp-ink); }
+  .analyst { background: var(--analyst); color: var(--analyst-ink); }
+  .lp { background: var(--lp); color: var(--lp-ink); }
+  .angel { background: var(--angel); color: var(--angel-ink); }
+  .founder { background: var(--founder); color: var(--founder-ink); }
+  .reader { background: var(--reader); color: var(--reader-ink); }
+  .signal { background: var(--signal); color: var(--signal-ink); }
+  .meeting { background: var(--meeting); color: var(--meeting-ink); }
+  .data { background: var(--data); color: var(--data-ink); }
   table {
     border-collapse: collapse;
     font-size: 12px;
@@ -225,25 +195,12 @@
     border: 1px solid var(--line);
     overflow: auto;
   }
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0 0;
-  }
-  .legend span {
-    border: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 8px;
-    text-transform: uppercase;
-  }
   footer {
     background: var(--panel);
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-size: 12px;
-    padding: 22px 40px;
+    padding: 20px 40px;
     text-align: center;
   }
   @media (max-width: 760px) {
@@ -256,147 +213,42 @@
 <body>
 
 <header>
-  <h1>Volery Portfolio Mapping</h1>
+  <h1>Portfolio Visuals</h1>
   <p>
-    Master lifecycle map for how the Portfolio module connects GP, analyst, LP,
-    angel investor, and founder surfaces. The focus is on role links, dashboard
-    entry points, company onboarding, new investment impact, signals, AI readers,
-    reports, and cross-module data flow.
+    Clear mind map for portfolio architecture: how a fund is created, how LPs are invited and notified,
+    how a company enters the portfolio, how founder/angel/LP/analyst/GP surfaces react, and how the
+    separate meetings module fits in without overwhelming the portfolio map.
   </p>
   <nav>
-    <a href="#master">1 Master Map</a>
-    <a href="#roles">2 Role Surfaces</a>
+    <a href="#portfolio-master">1 Portfolio Map</a>
+    <a href="#fund-created">2 Fund Created</a>
     <a href="#company-added">3 Company Added</a>
-    <a href="#investment">4 Investment Impact</a>
-    <a href="#signals">5 Signals & Readers</a>
-    <a href="#matrix">6 Impact Matrix</a>
+    <a href="#role-reactions">4 Role Reactions</a>
+    <a href="#meetings">5 Meetings</a>
   </nav>
 </header>
 
 <main>
 
-<section id="master">
-  <h2>1. Master Portfolio Graph</h2>
+<section id="portfolio-master">
+  <h2>1. Role Surfaces, Dashboards, and Interlinks</h2>
   <p class="lead">
-    Portfolio is the post-close fund and company hub. GP and analyst write and operate it;
-    LP and angel read role-shaped investment views; founder works through own-company
-    workspace routes that write back through ownership, MIS, document, and raise-round flows.
+    The portfolio system starts from role dashboards. GP and analyst operate funds and companies,
+    LP and angel get investment-facing views, and founder works through an own-company workspace.
+    Inbox and meetings sit beside these role surfaces.
   </p>
 
-  <div class="stat-row">
-    <div class="stat"><b>5</b><span>Tenant roles mapped: GP, analyst, LP, angel, founder.</span></div>
-    <div class="stat"><b>4</b><span>Main portfolio-facing surfaces: VC, LP, angel, founder workspace.</span></div>
-    <div class="stat"><b>2</b><span>Major write gates: portfolio write routes and change_requests approvals.</span></div>
-    <div class="stat"><b>1</b><span>Shared data layer with role-shaped response visibility.</span></div>
+  <div class="stats">
+    <div class="stat"><b>5</b><span>Tenant roles: GP, analyst, LP, angel investor, founder.</span></div>
+    <div class="stat"><b>3</b><span>Main write moments: fund creation, company addition, investment or round close.</span></div>
+    <div class="stat"><b>4</b><span>Fan-out channels: email, inbox, dashboards, published LP reports.</span></div>
+    <div class="stat"><b>1</b><span>Shared portfolio data layer with role-shaped visibility.</span></div>
   </div>
 
   <div class="diagram-wrap">
     <div class="mermaid">
-flowchart LR
-  PORT[("Portfolio module<br/>funds + companies + investments + metrics")]:::core
-
-  subgraph ROLES["Role surfaces"]
-    direction TB
-    GP["GP<br/>/portfolio<br/>/lp-reports<br/>/signals"]:::gp
-    ANA["Analyst<br/>/portfolio<br/>/analyst/* queues"]:::analyst
-    LP["LP<br/>/portfolio<br/>/capital-calls<br/>/investor-reporting"]:::lp
-    ANG["Angel<br/>/investments<br/>/portfolio<br/>/raise-rounds"]:::angel
-    FND["Founder<br/>/my-companies<br/>/companies/:id<br/>/founder/raise-rounds"]:::founder
-  end
-
-  GP -- "fund + company + report writes" --> PORT
-  ANA -- "review + approval + ops queues" --> PORT
-  LP -- "fund position + holdings read" --> PORT
-  ANG -- "co-investment + SPV read" --> PORT
-  FND -- "own-company workspace + MIS + raise" --> PORT
-
-  subgraph DATA["Shared portfolio data layer"]
-    direction TB
-    FUNDS[(funds)]:::data
-    FM[(fund_memberships)]:::data
-    PC[(portfolio_companies)]:::data
-    INV[(investments)]:::data
-    VAL[(valuations + valuation_marks)]:::data
-    CAP[(capital_activities)]:::data
-    MIS[(mis_submissions)]:::data
-    DOC[(documents + lp_reports)]:::data
-    RR[(raise_rounds)]:::data
-    ALERT[(anomaly_alerts)]:::data
-  end
-
-  PORT --> FUNDS
-  PORT --> FM
-  PORT --> PC
-  PORT --> INV
-  PORT --> VAL
-  PORT --> CAP
-  PORT --> MIS
-  PORT --> DOC
-  PORT --> RR
-  PORT --> ALERT
-
-  subgraph FEED["Upstream feeders"]
-    direction TB
-    PITCH["Pitch deck analysis"]:::feeder
-    SRC["Sourcing + deals"]:::feeder
-    DD["Due diligence handoff"]:::feeder
-    XLS["Excel import + MIS"]:::feeder
-    INTEL["Intelligence enrichment"]:::feeder
-  end
-
-  PITCH --> SRC --> DD --> PORT
-  XLS --> PORT
-  INTEL --> PORT
-
-  subgraph OUT["Readers and fan-out"]
-    direction TB
-    PAI["Portfolio AI"]:::reader
-    CAI["Company AI"]:::reader
-    EMAIL["Email and LP report send"]:::reader
-    NET["Network and co-investor graph"]:::reader
-    DASH["Dashboard attention/activity feeds"]:::reader
-    SIG["Signals + Alerts"]:::signal
-  end
-
-  PORT --> PAI
-  PORT --> CAI
-  PORT --> EMAIL
-  PORT --> NET
-  PORT --> DASH
-  PORT --> SIG
-
-  classDef core fill:#d97706,stroke:#92400e,stroke-width:4px,color:#ffffff,font-weight:bold
-  classDef gp fill:#fef3c7,stroke:#92400e,color:#171717,stroke-width:1.5px
-  classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717,stroke-width:1.5px
-  classDef lp fill:#dcfce7,stroke:#166534,color:#171717,stroke-width:1.5px
-  classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717,stroke-width:1.5px
-  classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717,stroke-width:1.5px
-  classDef feeder fill:#e0f2fe,stroke:#0c4a6e,color:#171717
-  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
-  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
-  classDef data fill:#ffffff,stroke:#b8b2a7,color:#171717
-    </div>
-  </div>
-
-  <p class="note">
-    Important boundary: founder does not use <code>/portfolio</code>. Founder sees portfolio-backed
-    data through <code>/my-companies</code> and <code>/companies/:id</code>. Angel has two views:
-    <code>/investments</code> for cross-org relationships and <code>/portfolio</code> for co-investment performance.
-  </p>
-</section>
-
-<section id="roles">
-  <h2>2. Role Surfaces, Dashboards, and Interlinks</h2>
-  <p class="lead">
-    The same rows are cut into different product surfaces. GP and analyst share the main portfolio
-    tabbed UI; LP and angel replace that page with role-specific views; founder uses a separate
-    workspace and dashboard.
-  </p>
-
-  <div class="diagram-wrap compact">
-    <div class="mermaid">
 flowchart TB
-  DASH["/dashboard<br/>role dispatcher"]:::hub
+  DASH["Role dashboard entry point"]:::core
 
   DASH --> GPD["GP Dashboard"]:::gp
   DASH --> AWD["Analyst Workbench"]:::analyst
@@ -404,358 +256,214 @@ flowchart TB
   DASH --> AHD["Angel Hub"]:::angel
   DASH --> FSD["Founder Studio"]:::founder
 
-  GPD --> GPPORT["/portfolio<br/>Dashboard, Companies, AI, Documents, Reports, Excel Q&A"]:::gp
-  GPD --> GPSIG["/signals + /alerts"]:::signal
-  GPD --> GPLP["/lp-reports<br/>quarterly report builder"]:::gp
-  GPD --> GPRR["/raise-rounds<br/>invest side"]:::gp
+  GPD --> GPPORT["Portfolio workspace<br/>funds, companies, AI, documents, reports"]:::gp
+  GPD --> GPSIG["Signals and alerts"]:::signal
+  GPD --> GPLP["LP report builder"]:::gp
+  GPD --> GPRR["Raise rounds, invest side"]:::gp
 
-  AWD --> AP["/portfolio<br/>same 6 tabs as GP"]:::analyst
-  AWD --> AF["/analyst/funds + /analyst/companies"]:::analyst
-  AWD --> AQ["MCA, Approval, Close Rounds, Reports queues"]:::analyst
-  AWD --> ALC["/analyst/lp-capital"]:::analyst
+  AWD --> AP["Portfolio workspace<br/>same operating tabs as GP"]:::analyst
+  AWD --> AF["Funds and companies operations"]:::analyst
+  AWD --> AQ["Approval, MCA, reports, document queues"]:::analyst
+  AWD --> ALC["LP capital tracking"]:::analyst
 
-  LPD --> LPORT["/portfolio<br/>cross-org org cards"]:::lp
-  LPORT --> LFUND["/portfolio/funds/:fund_id<br/>Overview, Cashflows, Holdings, Reports"]:::lp
-  LPD --> LCAP["/capital-calls<br/>confirm transfer"]:::lp
-  LPD --> LREP["/investor-reporting"]:::lp
+  LPD --> LPORT["LP portfolio<br/>fund positions across organizations"]:::lp
+  LPORT --> LFUND["Fund detail<br/>overview, cashflows, holdings, reports"]:::lp
+  LPD --> LCAP["Capital calls<br/>confirm transfer"]:::lp
+  LPD --> LREP["Investor reporting"]:::lp
 
-  AHD --> AINV["/investments<br/>cross-org firms and deals"]:::angel
-  AINV --> ACOMP["/investments/companies/:id<br/>company detail"]:::angel
-  AINV --> ASPV["/investments/spvs/:id<br/>SPV detail"]:::angel
-  AHD --> APORT["/portfolio<br/>co-investment metrics"]:::angel
-  AHD --> ARR["/raise-rounds<br/>discover and respond"]:::angel
+  AHD --> AINV["Angel investments<br/>firms, companies, SPVs"]:::angel
+  AINV --> ACOMP["Company investment detail"]:::angel
+  AINV --> ASPV["SPV detail"]:::angel
+  AHD --> APORT["Angel portfolio<br/>co-investment performance"]:::angel
+  AHD --> ARR["Raise-round invites and responses"]:::angel
 
-  FSD --> FMC["/my-companies<br/>founder company list"]:::founder
-  FMC --> FWS["/companies/:id<br/>workspace 9 tabs"]:::founder
-  FWS --> FTABS["Overview, Funding, Reports, Investors, MCA, Cap Table, Documents, Team, Raise"]:::founder
-  FSD --> FPITCH["/pitchdeck"]:::founder
-  FSD --> FMATCH["/founder-portal<br/>Investor Match"]:::founder
-  FSD --> FDD["/founder/dd-portal"]:::founder
+  FSD --> FMC["My companies<br/>founder company list"]:::founder
+  FMC --> FWS["Company workspace<br/>overview, funding, reports, investors"]:::founder
+  FWS --> FTABS["MCA, cap table, documents, team, raise"]:::founder
+  FSD --> FPITCH["Pitch deck"]:::founder
+  FSD --> FMATCH["Investor match"]:::founder
 
-  classDef hub fill:#d97706,stroke:#92400e,stroke-width:3px,color:#ffffff,font-weight:bold
+  DASH --> INBOX["Portfolio inbox<br/>accept and acknowledge actions"]:::reader
+  DASH --> MTG["Meetings<br/>video, recording, transcript, summary"]:::meeting
+
+  classDef core fill:#d97706,stroke:#92400e,stroke-width:4px,color:#ffffff,font-weight:bold
   classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
   classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717
   classDef lp fill:#dcfce7,stroke:#166534,color:#171717
   classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717
   classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717
+  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
   classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
+  classDef meeting fill:#fce7f3,stroke:#9d174d,color:#171717
     </div>
   </div>
 
-  <div class="grid" style="margin-top:16px">
-    <div class="card"><span class="tag gp">GP</span><h3>Fund operator</h3><p>Owns portfolio write workflows, reports, signals, and company detail visibility.</p><div class="route">/portfolio, /lp-reports, /signals, /alerts, /raise-rounds</div></div>
-    <div class="card"><span class="tag analyst">Analyst</span><h3>Approval and ops engine</h3><p>Runs queues that decide whether MIS, valuations, document responses, and round closes mutate portfolio data.</p><div class="route">/portfolio, /analyst/*, /alerts, /raise-rounds</div></div>
-    <div class="card"><span class="tag lp">LP</span><h3>Fund-position reader</h3><p>Sees committed funds, cashflows, holdings, published reports, and can confirm a capital-call transfer.</p><div class="route">/portfolio, /capital-calls, /investor-reporting</div></div>
-    <div class="card"><span class="tag angel">Angel</span><h3>Co-investment reader</h3><p>Sees cross-org investment relationships, co-investment cards, SPVs, lead fund, and raise-round invites.</p><div class="route">/investments, /portfolio, /raise-rounds</div></div>
-    <div class="card"><span class="tag founder">Founder</span><h3>Own-company operator</h3><p>Sees only companies linked through founder ownership. Updates flow through workspace, MIS, documents, and raise rounds.</p><div class="route">/my-companies, /companies/:id, /founder/dd-portal</div></div>
+  <div class="grid">
+    <div class="card"><span class="tag gp">GP</span><h3>Fund operator</h3><p>Creates and manages funds, companies, reports, LP communication, signals, and raise-round investment views.</p></div>
+    <div class="card"><span class="tag analyst">Analyst</span><h3>Operations and review</h3><p>Works through portfolio tabs and analyst queues for approvals, reports, documents, MCA, LP capital, and company review.</p></div>
+    <div class="card"><span class="tag lp">LP</span><h3>Fund-position reader</h3><p>Sees commitments, cashflows, holdings, capital calls, and published reports for funds where membership exists.</p></div>
+    <div class="card"><span class="tag angel">Angel</span><h3>Co-investment reader</h3><p>Sees co-investment performance, company detail, SPV detail, lead fund context, and raise-round opportunities.</p></div>
+    <div class="card"><span class="tag founder">Founder</span><h3>Own-company workspace</h3><p>Sees only companies connected through founder ownership and updates reports, funding, investors, documents, and raise status.</p></div>
   </div>
 </section>
 
-<section id="company-added">
-  <h2>3. When a Company Is Added</h2>
+<section id="fund-created">
+  <h2>2. Fund Created Flow</h2>
   <p class="lead">
-    A company added by GP or analyst does not simply appear everywhere. It creates portfolio rows,
-    optional investment/valuation records, onboarding links for founders, possible angel role invites,
-    and role-specific visibility depending on fund membership and ownership.
-  </p>
-
-  <div class="diagram-wrap">
-    <div class="mermaid">
-flowchart LR
-  ADD["GP or Analyst<br/>Add Company modal"]:::gp
-  API["POST /api/portfolio/companies"]:::api
-  COMPANY["Create or reuse<br/>Company"]:::data
-  PC["Create PortfolioCompany<br/>pending founder onboarding"]:::data
-  OPT["Optional initial<br/>Investment + Valuation + ValuationMark"]:::data
-  CACHE["Invalidate fund caches<br/>refresh metrics later"]:::signal
-
-  ADD --> API --> COMPANY --> PC
-  API --> OPT --> CACHE
-  PC --> CACHE
-
-  subgraph FOUNDER_FLOW["Founder linkage"]
-    direction TB
-    INVITE["Founder invitation email"]:::founder
-    ACCEPT["Founder accepts"]:::founder
-    OWN["FounderCompanyOwnership"]:::founder
-    FVIEW["Appears in /my-companies<br/>and /companies/:id workspace"]:::founder
-  end
-
-  PC --> INVITE --> ACCEPT --> OWN --> FVIEW
-
-  subgraph ANGEL_FLOW["Angel linkage"]
-    direction TB
-    AINVITE["Co-investor / angel invite"]:::angel
-    AMEMBER["FundMembership role=angel_investor"]:::angel
-    AVIEW["Appears in /investments<br/>and /portfolio co-investments"]:::angel
-  end
-
-  PC --> AINVITE --> AMEMBER --> AVIEW
-
-  subgraph LP_FLOW["LP linkage"]
-    direction TB
-    LPMEMBER["LP fund membership exists"]:::lp
-    LHOLD["Company appears in fund holdings"]:::lp
-    LREP["Published LP reports include company"]:::lp
-  end
-
-  PC --> LPMEMBER --> LHOLD --> LREP
-
-  subgraph GP_ANALYST_FLOW["GP + Analyst visibility"]
-    direction TB
-    LIST["Portfolio company list"]:::gp
-    DETAIL["Company detail<br/>summary, financials, analytics, AI"]:::gp
-    QUEUE["Analyst approval / document / MCA queues"]:::analyst
-  end
-
-  PC --> LIST --> DETAIL
-  PC --> QUEUE
-
-  classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
-  classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717
-  classDef lp fill:#dcfce7,stroke:#166534,color:#171717
-  classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717
-  classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717
-  classDef api fill:#fff7ed,stroke:#d97706,color:#171717
-  classDef data fill:#ffffff,stroke:#b8b2a7,color:#171717
-  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
-    </div>
-  </div>
-
-  <div class="matrix" style="margin-top:16px">
-    <table>
-      <thead>
-        <tr>
-          <th>Role</th>
-          <th>Immediate effect</th>
-          <th>What must exist before they see it</th>
-          <th>Main surface</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>GP</td>
-          <td>Company becomes part of the fund operating portfolio.</td>
-          <td>PortfolioCompany row in the active fund.</td>
-          <td><code>/portfolio</code> Companies tab and company detail.</td>
-        </tr>
-        <tr>
-          <td>Analyst</td>
-          <td>Can operate the company and review related queue items.</td>
-          <td>VC-side access to the org and fund.</td>
-          <td><code>/portfolio</code>, <code>/analyst/companies</code>, review queues.</td>
-        </tr>
-        <tr>
-          <td>Founder</td>
-          <td>Receives invite; after acceptance, company appears as own-company workspace.</td>
-          <td>FounderCompanyOwnership link or accepted invite.</td>
-          <td><code>/my-companies</code> and <code>/companies/:id</code>.</td>
-        </tr>
-        <tr>
-          <td>LP</td>
-          <td>Sees it only through fund holdings and published reporting.</td>
-          <td>LP membership in the fund; role-shaped LP read endpoint.</td>
-          <td><code>/portfolio/funds/:fund_id</code> Holdings and Reports tabs.</td>
-        </tr>
-        <tr>
-          <td>Angel</td>
-          <td>Sees it only if added as a co-investor/member for that company/deal.</td>
-          <td>Angel fund/company membership, SPV, or accepted raise participation.</td>
-          <td><code>/investments</code>, <code>/portfolio</code>, company/SPV drill-ins.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="investment">
-  <h2>4. When a New Investment or Round Close Arrives</h2>
-  <p class="lead">
-    A new investment updates more than one screen. It writes Investment rows, valuation marks,
-    company derived fields, fund metrics, LP report status, ownership snapshots, notifications,
-    and dashboard feeds. Round close is approval-gated through change_requests.
+    A new fund starts from GP/analyst portfolio write access. The system creates the fund, invalidates fund
+    cache, provisions LP invite/membership records, creates LP inbox actions, sends LP email, and notifies
+    analysts so the operational team sees the new fund immediately.
   </p>
 
   <div class="diagram-wrap">
     <div class="mermaid">
 flowchart TB
-  subgraph SOURCES["Investment sources"]
-    DIRECT["Direct investment write<br/>POST /api/portfolio/investments"]:::gp
-    RR["Founder raise round<br/>published + investor responses"]:::founder
-    DD["Due diligence closed<br/>portfolio handoff bridge"]:::feeder
+  START["GP or analyst creates fund"]:::gp
+  API["Save fund"]:::api
+  LIMIT["Plan limit check"]:::api
+  FUND["Fund becomes active"]:::data
+  CACHE["Fund cache invalidated"]:::signal
+
+  START --> API --> LIMIT --> FUND --> CACHE
+
+  subgraph LP_FLOW["LP invite and membership flow"]
+    direction LR
+    LPINV["LP invite details<br/>email, name, commitment"]:::lp
+    EXISTING["Existing active LP?"]:::lp
+    ACTIVE["Create or reactivate<br/>fund membership"]:::data
+    LINK["Create secure invite link"]:::data
+    LPINBOX["LP inbox item<br/>accept fund invite"]:::reader
+    LPEMAIL["LP invite email"]:::reader
+    LPPORTAL["LP sees fund portal"]:::lp
   end
 
-  DIRECT --> REC["record_investment service"]:::api
-  DD --> REC
-  RR --> CR["change_request<br/>resource=raise_rounds action=close"]:::analyst
-  CR --> APPROVE["Analyst / GP approval"]:::analyst
-  APPROVE --> APPLIER["RaiseRoundCloseApplier"]:::api
+  FUND --> LPINV --> EXISTING
+  EXISTING -- yes --> ACTIVE --> LPINBOX
+  EXISTING -- no --> LINK --> LPINBOX
+  LPINBOX --> LPEMAIL --> LPPORTAL
+  LPINBOX --> ACTIVE
 
-  REC --> INV["Investment rows"]:::data
-  REC --> OS["OwnershipSnapshot"]:::data
-  REC --> PCUP["PortfolioCompany totals<br/>invested, valuation, ownership, MOIC"]:::data
+  subgraph ANALYST_FLOW["Analyst awareness"]
+    direction LR
+    ALOOKUP["Find active analysts"]:::analyst
+    AINBOX["Analyst inbox<br/>acknowledge new fund"]:::reader
+    AEMAIL["Analyst email<br/>new fund update"]:::reader
+    ADASH["Analyst workbench updates"]:::analyst
+  end
 
-  APPLIER --> INV
-  APPLIER --> VAL["ValuationMark rows"]:::data
-  APPLIER --> EXT["External investors / executed terms"]:::data
-  APPLIER --> DERIVE["Derived Company fields<br/>stage, valuation, funding, last round"]:::data
+  FUND --> ALOOKUP --> AINBOX --> AEMAIL --> ADASH
 
-  INV --> FUND["Fund metrics recompute<br/>NAV, TVPI, DPI, RVPI, IRR"]:::signal
-  VAL --> FUND
-  PCUP --> FUND
-  DERIVE --> FUND
+  classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
+  classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717
+  classDef lp fill:#dcfce7,stroke:#166534,color:#171717
+  classDef api fill:#fff7ed,stroke:#d97706,color:#171717
+  classDef data fill:#f8fafc,stroke:#64748b,color:#171717
+  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
+  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
+    </div>
+  </div>
 
-  FUND --> GPV["GP portfolio KPIs<br/>company detail + reports"]:::gp
-  FUND --> ANAV["Analyst queues clear<br/>LP capital + reports review"]:::analyst
-  FUND --> LPV["LP NAV, holdings, cashflows<br/>published reports"]:::lp
-  INV --> ANGV["Angel co-investment cards<br/>SPV + lead fund detail"]:::angel
-  DERIVE --> FNDV["Founder funding history<br/>cap table + raise status"]:::founder
-  FUND --> EMAIL["LP report supersede/send<br/>capital-call reminders"]:::reader
-  FUND --> SIG["Signals, alerts, dashboards"]:::signal
+  <div class="grid">
+    <div class="card"><span class="tag gp">GP / Analyst</span><h3>Creates the fund</h3><p>Fund rows are created through portfolio write routes and become the fund context for companies, LP commitments, reports, and metrics.</p></div>
+    <div class="card"><span class="tag lp">LP</span><h3>Receives invite and inbox action</h3><p>Existing LPs can be activated directly. New LPs receive a join token and an inbox item that accepts the fund invite.</p></div>
+    <div class="card"><span class="tag analyst">Analyst</span><h3>Gets notified</h3><p>Active analysts get an inbox acknowledgement plus a fund update email so operations can track the newly created fund.</p></div>
+  </div>
+</section>
+
+<section id="company-added">
+  <h2>3. Company Added Flow</h2>
+  <p class="lead">
+    A company is first added as a portfolio company in pending founder activation. From there the system fans
+    out to founder onboarding, angel co-investor invitations, top-LP notification, analyst notifications,
+    dashboard refresh, optional initial investment, valuation, and fund metric cache invalidation.
+  </p>
+
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart LR
+  ADD["GP or analyst adds company"]:::gp
+  API["Save company"]:::api
+  COMPANY["Company record<br/>created or reused"]:::data
+  PC["Portfolio company<br/>waiting for founder activation"]:::data
+  OPTIONAL["Optional initial investment<br/>valuation + mark"]:::data
+  CACHE["Invalidate fund metrics cache"]:::signal
+
+  ADD --> API --> COMPANY --> PC
+  API --> OPTIONAL --> CACHE
+  PC --> CACHE
+
+  subgraph FOUNDER["Founder onboarding"]
+    direction TB
+    FI["Founder invitation<br/>founder and cofounders"]:::founder
+    FEM["Founder invite email"]:::reader
+    FIN["Founder inbox<br/>accept company invite"]:::reader
+    OWN["Founder ownership link"]:::founder
+    REL["Founder relationship<br/>portfolio member"]:::founder
+    ACTIVE["Company becomes active"]:::data
+    FVIEW["Founder sees<br/>My Companies workspace"]:::founder
+  end
+
+  PC --> FI --> FEM
+  FI --> FIN --> OWN --> REL --> ACTIVE --> FVIEW
+
+  subgraph LP["LP notification and visibility"]
+    direction TB
+    TOP["Top LP selected<br/>highest active commitment"]:::lp
+    TOPMAIL["Top LP email<br/>company added"]:::reader
+    TOPINBOX["Top LP inbox<br/>acknowledge"]:::reader
+    HOLDINGS["LP fund holdings update"]:::lp
+    REPORTS["Published LP reports include company"]:::lp
+  end
+
+  PC --> TOP --> TOPMAIL
+  TOP --> TOPINBOX
+  PC --> HOLDINGS --> REPORTS
+
+  subgraph ANGEL["Angel co-investor path"]
+    direction TB
+    AINV["Angel invite link"]:::angel
+    AEMAIL["Angel co-investor email"]:::reader
+    AINBOX["Angel inbox<br/>accept"]:::reader
+    AMEM["Angel fund membership"]:::angel
+    AVIEW["Angel investment views update"]:::angel
+  end
+
+  PC --> AINV --> AEMAIL
+  AINV --> AINBOX --> AMEM --> AVIEW
+
+  subgraph OPS["GP and Analyst operations"]
+    direction TB
+    LIST["Portfolio company list"]:::gp
+    DETAIL["Company detail + AI + docs"]:::gp
+    ANALYSTMAIL["Analyst company-added email"]:::reader
+    ANALYSTINBOX["Analyst inbox<br/>founder activation pending"]:::reader
+    QUEUES["Analyst queues<br/>reports, docs, MCA, approvals"]:::analyst
+  end
+
+  PC --> LIST --> DETAIL
+  PC --> ANALYSTMAIL
+  PC --> ANALYSTINBOX
+  PC --> QUEUES
 
   classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
   classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717
   classDef lp fill:#dcfce7,stroke:#166534,color:#171717
   classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717
   classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717
-  classDef feeder fill:#e0f2fe,stroke:#0c4a6e,color:#171717
   classDef api fill:#fff7ed,stroke:#d97706,color:#171717
-  classDef data fill:#ffffff,stroke:#b8b2a7,color:#171717
-  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
-  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
-    </div>
-  </div>
-
-  <div class="wide-grid" style="margin-top:16px">
-    <div class="card">
-      <span class="tag gp">GP impact</span>
-      <h3>Fund performance changes</h3>
-      <ul>
-        <li>Portfolio KPIs and company MOIC/valuation refresh after cache invalidation.</li>
-        <li>Company detail, report builder, saved queries, and portfolio AI now read the new investment context.</li>
-        <li>LP reports may be superseded if the round changes a previously published period.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <span class="tag analyst">Analyst impact</span>
-      <h3>Queue state changes</h3>
-      <ul>
-        <li>Close Rounds queue transitions once the change request is approved or rejected.</li>
-        <li>LP Capital, reports review, valuation review, document requests, and anomaly queues use updated portfolio rows.</li>
-        <li>Analyst remains the main approval operator for post-close data hygiene.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <span class="tag lp">LP impact</span>
-      <h3>Position view changes</h3>
-      <ul>
-        <li>NAV, TVPI, DPI, IRR, cashflows, holdings, and report tabs reflect fund-level changes.</li>
-        <li>LP only sees role-shaped fund/company fields, not GP operational internals.</li>
-        <li>The write exception remains capital-call transfer confirmation.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <span class="tag angel">Angel impact</span>
-      <h3>Co-investment view changes</h3>
-      <ul>
-        <li>Angel portfolio cards update when the angel has a company or SPV membership.</li>
-        <li>Raise-round responses and investment requests connect the angel to the invest-side flow.</li>
-        <li>Angel visibility is deal economics, not sensitive operating metrics.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <span class="tag founder">Founder impact</span>
-      <h3>Company workspace changes</h3>
-      <ul>
-        <li>Funding history, cap table, investors, and raise status change after approved close.</li>
-        <li>Founder can submit MIS and documents, but approved writes are gated where required.</li>
-        <li>Founder sees own company only through ownership links.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="signals">
-  <h2>5. Signals, Alerts, AI, Reports, and Reader Modules</h2>
-  <p class="lead">
-    Portfolio is not isolated after data lands. Monitoring creates anomalies, intelligence produces
-    signal and alert events, AI readers answer role-scoped questions, email distributes reports, and
-    dashboard aggregator routes pull attention/activity feeds.
-  </p>
-
-  <div class="diagram-wrap">
-    <div class="mermaid">
-flowchart LR
-  PORT[("Portfolio data")]:::core
-
-  subgraph MON["Signals and monitoring"]
-    direction TB
-    INTEL["Intelligence<br/>news + filings + enrichment"]:::feeder
-    SE["signal_events"]:::signal
-    AE["alert_events"]:::signal
-    PM["PortfolioMonitor<br/>metric changes + health"]:::signal
-    AA["anomaly_alerts"]:::signal
-  end
-
-  INTEL --> SE --> AE
-  PORT --> PM --> AA
-  AE --> SIGPAGE["/signals and /alerts"]:::signal
-  AA --> SIGPAGE
-
-  subgraph DASH["Dashboard aggregator"]
-    direction TB
-    GPATT["GP attention<br/>unresolved anomalies"]:::gp
-    GPACT["GP activity<br/>capital activities"]:::gp
-    FATT["Founder attention<br/>revision requested MIS"]:::founder
-    FACT["Founder activity<br/>MIS submissions"]:::founder
-    AATT["Angel attention<br/>document requests"]:::angel
-    AACT["Angel activity<br/>valuations"]:::angel
-  end
-
-  PORT --> GPATT
-  PORT --> GPACT
-  PORT --> FATT
-  PORT --> FACT
-  PORT --> AATT
-  PORT --> AACT
-
-  subgraph READERS["Downstream readers"]
-    direction TB
-    PAI["Portfolio AI<br/>fund/org questions"]:::reader
-    CAI["Company AI<br/>single-company questions"]:::reader
-    REP["LP report builder<br/>publish + supersede"]:::reader
-    EMAIL["Email dispatcher<br/>reports, reminders, invites"]:::reader
-    NET["Network<br/>co-investor context"]:::reader
-  end
-
-  PORT --> PAI
-  PORT --> CAI
-  PORT --> REP --> EMAIL
-  PORT --> NET
-
-  classDef core fill:#d97706,stroke:#92400e,stroke-width:4px,color:#ffffff,font-weight:bold
-  classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
-  classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717
-  classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717
-  classDef feeder fill:#e0f2fe,stroke:#0c4a6e,color:#171717
+  classDef data fill:#f8fafc,stroke:#64748b,color:#171717
   classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
   classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
     </div>
   </div>
-
-  <div class="legend">
-    <span style="background:var(--feeder);color:var(--feeder-ink)">Upstream feeder</span>
-    <span style="background:var(--signal);color:var(--signal-ink)">Signal / alert</span>
-    <span style="background:var(--reader);color:var(--reader-ink)">Reader / fan-out</span>
-    <span style="background:var(--accent-soft);color:var(--accent-dark)">Portfolio core</span>
-  </div>
 </section>
 
-<section id="matrix">
-  <h2>6. Impact Matrix for Product Breakdowns</h2>
+<section id="role-reactions">
+  <h2>4. Role Reaction Map</h2>
   <p class="lead">
-    Use this as the breakdown checklist before changing portfolio behavior. Each new portfolio feature
-    should be checked against role visibility, write gate, cache invalidation, reporting, and signal fan-out.
+    Use this table to explain what each role sees when the fund or company lifecycle changes. GP and analyst
+    operate the portfolio. LP and angel receive scoped investment views. Founder receives only own-company
+    workspaces after acceptance.
   </p>
 
   <div class="matrix">
@@ -768,82 +476,93 @@ flowchart LR
           <th>LP</th>
           <th>Angel</th>
           <th>Founder</th>
-          <th>Shared systems touched</th>
+          <th>Main shared systems</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td>Fund created</td>
+          <td>Creates active fund and selects fund context in portfolio.</td>
+          <td>Receives inbox/email and can operate the fund in analyst surfaces.</td>
+          <td>Receives invite email and inbox accept action; sees fund after membership.</td>
+          <td>No direct effect until invited as co-investor or member.</td>
+          <td>No direct effect until a company ownership link exists.</td>
+          <td>Fund record, fund membership, invite links, inbox items, email dispatcher, cache invalidation.</td>
+        </tr>
+        <tr>
           <td>Company added</td>
-          <td>Creates and manages company in portfolio list/detail.</td>
-          <td>Can review, enrich, request docs, and operate queues.</td>
-          <td>Sees only through fund holdings/reporting if LP member.</td>
-          <td>Sees only if co-investor or invited into the deal.</td>
-          <td>Sees after invite/ownership link in My Companies.</td>
-          <td>Company, PortfolioCompany, invitations, optional investment/valuation, cache invalidation.</td>
+          <td>Sees company in portfolio list/detail and can manage company context.</td>
+          <td>Receives notifications and can review queues for docs, MCA, reports, approvals.</td>
+          <td>Top LP gets email/inbox; LP holdings and reports reflect the company when published.</td>
+          <td>Gets invite/email/inbox if added as co-investor; views update after membership.</td>
+          <td>Gets founder invite/email/inbox; workspace appears after acceptance.</td>
+          <td>Company record, portfolio company record, founder invitations, role invites, inbox, email, optional investment and valuation.</td>
         </tr>
         <tr>
-          <td>New investment</td>
-          <td>KPIs, MOIC, reports, AI, and company detail change.</td>
-          <td>Close/review queues and LP Capital reflect new data.</td>
-          <td>NAV, TVPI/DPI/IRR, cashflows, holdings, reports change.</td>
-          <td>Co-investment cards, SPV, valuation/activity feeds change.</td>
-          <td>Funding history, cap table, investors, raise status change.</td>
-          <td>Investment rows, valuation marks, ownership snapshots, fund metrics recompute, LP report supersede.</td>
+          <td>Investment or round close</td>
+          <td>KPIs, MOIC, reports, company detail, and portfolio AI update.</td>
+          <td>Approval queues clear or change; valuation/report/capital views refresh.</td>
+          <td>NAV, TVPI, DPI, IRR, cashflows, holdings, and reports update by fund.</td>
+          <td>Co-investment cards, SPV/detail pages, and activity feeds update.</td>
+          <td>Funding history, investors, cap table, and raise status update.</td>
+          <td>Investments, valuation marks, ownership snapshots, fund metric recompute, LP report refresh, dashboards.</td>
         </tr>
         <tr>
-          <td>MIS submitted</td>
-          <td>Eventually affects metrics and reports after approval.</td>
-          <td>Owns review queue and approve/reject flow.</td>
-          <td>Only sees approved/reportable fund effects.</td>
-          <td>No direct MIS write/read surface.</td>
-          <td>Submits in Reports tab; tracks pending/approved status.</td>
-          <td>change_requests, mis_submissions, anomaly flags, dashboard attention feeds.</td>
-        </tr>
-        <tr>
-          <td>Document requested</td>
-          <td>Requests and reads company documents.</td>
-          <td>Tracks document request queue and closure.</td>
-          <td>Reads only published LP reports/documents allowed to LP.</td>
-          <td>May get attention feed for open requests on co-invested companies.</td>
-          <td>Uploads or acknowledges requested documents.</td>
-          <td>documents, document_requests, email notifications, dashboard feeds.</td>
-        </tr>
-        <tr>
-          <td>Signal or anomaly</td>
-          <td>Sees Signals, Alerts, critical badge, GP attention feed.</td>
-          <td>Sees Alerts and operational review queues.</td>
-          <td>Sees only if translated into reports or fund-facing updates.</td>
-          <td>May see related activity through angel dashboard if tied to co-investment.</td>
-          <td>Sees own-company attention when action is requested.</td>
-          <td>signal_events, alert_events, anomaly_alerts, monitoring, dashboard aggregator.</td>
+          <td>MIS, documents, signals</td>
+          <td>Sees anomalies, documents, reports, alerts, and operational KPIs.</td>
+          <td>Reviews submissions, document requests, anomalies, and approval outcomes.</td>
+          <td>Sees only approved/reportable outputs through LP reporting.</td>
+          <td>Sees only scoped co-investment activity and allowed document attention.</td>
+          <td>Submits MIS/documents and sees own-company action requests.</td>
+          <td>Change requests, MIS submissions, documents, anomaly alerts, dashboard feeds, email notifications.</td>
         </tr>
       </tbody>
     </table>
   </div>
+</section>
 
-  <div class="wide-grid" style="margin-top:16px">
-    <div class="card">
-      <span class="tag signal">Design rule</span>
-      <h3>Role shape first</h3>
-      <p>Any new field or view should answer which role can see it and whether response_shaper or a role router owns the gate.</p>
+<section id="meetings">
+  <h2>5. Meetings Module, Simplified</h2>
+  <p class="lead">
+    Meetings is separate from portfolio but uses the same five-role tenant context. Keep the meeting story
+    simple for presentation: create meeting, join video panel, record to S3, generate transcript, generate
+    AI summary, email the recap to participants.
+  </p>
+
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart LR
+  CREATE["Create meeting"]:::meeting
+  INVITE["Invite allowed roles<br/>same-org invite matrix"]:::meeting
+  ROOM["Video panel<br/>LiveKit room"]:::meeting
+  RECORD["Recording<br/>LiveKit Egress"]:::meeting
+  S3["Store MP4<br/>S3 bucket"]:::data
+  TRANSCRIPT["AI transcript<br/>AssemblyAI"]:::reader
+  SUMMARY["AI summary<br/>decisions + action items"]:::reader
+  EMAIL["Summary email<br/>organizer + joined participants"]:::reader
+  VIEW["Meeting detail<br/>recording, transcript, summary"]:::meeting
+
+  CREATE --> INVITE --> ROOM --> RECORD --> S3 --> TRANSCRIPT --> SUMMARY --> EMAIL
+  SUMMARY --> VIEW
+  S3 --> VIEW
+
+  classDef meeting fill:#fce7f3,stroke:#9d174d,color:#171717
+  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
+  classDef data fill:#f8fafc,stroke:#64748b,color:#171717
     </div>
-    <div class="card">
-      <span class="tag signal">Design rule</span>
-      <h3>Write path second</h3>
-      <p>Anything that mutates portfolio economics should go through the sanctioned writer, approval flow, cache invalidation, and metric recompute path.</p>
-    </div>
-    <div class="card">
-      <span class="tag signal">Design rule</span>
-      <h3>Fan-out last</h3>
-      <p>After the write, check dashboards, AI readers, reports, email, signals, alerts, and cross-org views for stale or missing states.</p>
-    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><span class="tag meeting">Create</span><h3>Meeting shell</h3><p>All five roles can use meetings, but invite targets are controlled by role rules.</p></div>
+    <div class="card"><span class="tag meeting">Join</span><h3>Video panel</h3><p>LiveKit powers the room. Users join from the meeting room page with a minted join token.</p></div>
+    <div class="card"><span class="tag reader">After call</span><h3>Transcript and summary</h3><p>Recording lands in S3, transcript is generated, AI summary is created, and recap email is sent.</p></div>
   </div>
 </section>
 
 </main>
 
 <footer>
-  Updated from codebase review and <code>PORTFOLIO_MINDMAP.md</code>. Edited artifact only: <code>PORTFOLIO_VISUAL.html</code>.
+  Standalone visual file: <code>visuals.html</code>. Portfolio context is detailed; meetings are intentionally simplified.
 </footer>
 
 <script type="module">
@@ -856,8 +575,8 @@ flowchart LR
       curve: 'basis',
       useMaxWidth: true,
       htmlLabels: true,
-      nodeSpacing: 44,
-      rankSpacing: 58,
+      nodeSpacing: 42,
+      rankSpacing: 54,
       padding: 12,
     },
     themeVariables: {
@@ -867,8 +586,6 @@ flowchart LR
       primaryTextColor: '#171717',
       primaryBorderColor: '#92400e',
       lineColor: '#66645f',
-      secondaryColor: '#dbeafe',
-      tertiaryColor: '#dcfce7',
       background: '#ffffff',
       mainBkg: '#ffffff',
       nodeBorder: '#171717',
