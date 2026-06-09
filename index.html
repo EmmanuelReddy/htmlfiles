@@ -1,338 +1,736 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Portfolio Visuals - Fund, Company, Roles, Meetings</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-  :root {
-    --bg: #fbfaf6;
-    --panel: #ffffff;
-    --ink: #171717;
-    --muted: #66645f;
-    --line: #dedbd2;
-    --accent: #d97706;
-    --accent-dark: #92400e;
-    --accent-soft: #fef3c7;
-    --gp: #fef3c7;
-    --gp-ink: #92400e;
-    --analyst: #dbeafe;
-    --analyst-ink: #1e40af;
-    --lp: #dcfce7;
-    --lp-ink: #166534;
-    --angel: #ffedd5;
-    --angel-ink: #9a3412;
-    --founder: #ede9fe;
-    --founder-ink: #5b21b6;
-    --reader: #d1fae5;
-    --reader-ink: #065f46;
-    --signal: #fee2e2;
-    --signal-ink: #991b1b;
-    --meeting: #fce7f3;
-    --meeting-ink: #9d174d;
-    --data: #f8fafc;
-    --data-ink: #334155;
-    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volery — Scope Evolution Report</title>
+  <style>
+    :root {
+      --bg: #fdf7f2;
+      --surface: #fff8f3;
+      --card: #ffffff;
+      --border: #f0ddd0;
+      --accent: #ea580c;
+      --accent2: #f97316;
+      --green: #16a34a;
+      --amber: #d97706;
+      --text: #1c1917;
+      --muted: #78716c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+      font-size: 14px;
+    }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.5;
-  }
-  header {
-    background: var(--panel);
-    border-bottom: 1px solid var(--line);
-    padding: 28px 40px 22px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  h1 {
-    font-size: 30px;
-    letter-spacing: -0.03em;
-    margin: 0;
-  }
-  header p {
-    color: var(--muted);
-    font-size: 14px;
-    margin: 8px 0 0;
-    max-width: 1120px;
-  }
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-  }
-  nav a {
-    background: #fffdf7;
-    border: 1px solid var(--line);
-    color: var(--accent-dark);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    padding: 6px 10px;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  main {
-    margin: 0 auto;
-    max-width: 1680px;
-    padding: 34px 40px 56px;
-  }
-  section { margin-bottom: 54px; }
-  h2 {
-    font-size: 22px;
-    letter-spacing: -0.02em;
-    margin: 0 0 6px;
-  }
-  .lead {
-    color: var(--muted);
-    font-size: 13px;
-    margin: 0 0 18px;
-    max-width: 1080px;
-  }
-  code {
-    background: var(--accent-soft);
-    color: var(--accent-dark);
-    font-family: var(--mono);
-    font-size: 12px;
-    padding: 1px 5px;
-  }
-  .diagram-wrap {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    overflow: auto;
-    padding: 24px;
-  }
-  .diagram-wrap .mermaid { min-width: 980px; }
-  .stats {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    margin-bottom: 18px;
-  }
-  .stat, .card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    padding: 14px;
-  }
-  .stat b {
-    display: block;
-    font-size: 22px;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .stat span, .card p {
-    color: var(--muted);
-    display: block;
-    font-size: 12px;
-    margin: 0;
-  }
-  .grid {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    margin-top: 16px;
-  }
-  .wide-grid {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    margin-top: 16px;
-  }
-  .card h3 {
-    font-size: 15px;
-    margin: 8px 0 8px;
-  }
-  .tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    padding: 3px 7px;
-    text-transform: uppercase;
-  }
-  .gp { background: var(--gp); color: var(--gp-ink); }
-  .analyst { background: var(--analyst); color: var(--analyst-ink); }
-  .lp { background: var(--lp); color: var(--lp-ink); }
-  .angel { background: var(--angel); color: var(--angel-ink); }
-  .founder { background: var(--founder); color: var(--founder-ink); }
-  .reader { background: var(--reader); color: var(--reader-ink); }
-  .signal { background: var(--signal); color: var(--signal-ink); }
-  .meeting { background: var(--meeting); color: var(--meeting-ink); }
-  .data { background: var(--data); color: var(--data-ink); }
-  table {
-    border-collapse: collapse;
-    font-size: 12px;
-    width: 100%;
-  }
-  th, td {
-    border: 1px solid var(--line);
-    padding: 10px;
-    text-align: left;
-    vertical-align: top;
-  }
-  th {
-    background: #fff9eb;
-    color: var(--accent-dark);
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-  }
-  td:first-child {
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  .matrix {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    overflow: auto;
-  }
-  footer {
-    background: var(--panel);
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 12px;
-    padding: 20px 40px;
-    text-align: center;
-  }
-  @media (max-width: 760px) {
-    header { position: static; padding: 24px; }
-    main { padding: 24px; }
-    .diagram-wrap .mermaid { min-width: 760px; }
-  }
-</style>
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
+      border-bottom: 1px solid #fcd9b6;
+      padding: 56px 48px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -120px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(234,88,12,.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(249,115,22,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .logo-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(234,88,12,.1);
+      border: 1px solid rgba(234,88,12,.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: #c2410c;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 38px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+      background: linear-gradient(135deg, #1c1917 0%, #ea580c 55%, #f97316 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero p { color: #57534e; font-size: 15px; max-width: 560px; margin-bottom: 30px; }
+    .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .stat-chip {
+      background: #ffffff;
+      border: 1px solid #fcd9b6;
+      border-radius: 12px;
+      padding: 12px 20px;
+      box-shadow: 0 1px 4px rgba(234,88,12,.08);
+    }
+    .stat-chip .num { font-size: 26px; font-weight: 800; color: #ea580c; display: block; }
+    .stat-chip .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 52px 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+
+    /* ── SECTION HEADERS ── */
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .section-title { font-size: 24px; font-weight: 800; color: #1c1917; margin-bottom: 6px; }
+    .section-desc { color: var(--muted); margin-bottom: 32px; font-size: 13.5px; }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 155px 1fr 1fr 1fr;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(234,88,12,.06);
+    }
+    .compare-grid .cell {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .compare-grid .cell:nth-last-child(-n+4) { border-bottom: none; }
+    .compare-grid .header {
+      background: #fff7ed;
+      font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 2px solid #fcd9b6;
+    }
+    .compare-grid .header.past-h  { background: #fff5f5; color: #b91c1c; border-bottom: 2px solid #fecaca; }
+    .compare-grid .header.pres-h  { background: #f0fdf4; color: #15803d; border-bottom: 2px solid #bbf7d0; }
+    .compare-grid .header.fut-h   { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #bfdbfe; }
+    .compare-grid .row-label { background: #fffbf7; font-weight: 600; color: #44403c; font-size: 12px; }
+    .compare-grid .past    { background: #fff5f5; color: #b91c1c; }
+    .compare-grid .present { background: #f0fdf4; color: #15803d; }
+    .compare-grid .future  { background: #eff6ff; color: #1e40af; }
+    .compare-grid .row-group {
+      background: #fff7ed;
+      grid-column: 1 / -1;
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: #c2410c;
+      padding: 7px 16px;
+      border-bottom: 1px solid #fcd9b6;
+    }
+
+    /* ── BADGE ── */
+    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
+    .badge-blue  { background: #dbeafe; color: #1d4ed8; }
+
+    /* ── ROLE CARDS ── */
+    .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+    .role-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 4px rgba(234,88,12,.06); }
+    .role-scope-bar { height: 3px; position: relative; background: #fde8d8; }
+    .role-scope-bar .fill { position: absolute; top: 0; left: 0; height: 100%; }
+    .role-header {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .role-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .role-header .info h3 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .role-header .info p { font-size: 11px; color: var(--muted); }
+    .role-body { padding: 18px 22px; }
+    .past-present-pair {
+      display: flex; gap: 8px; align-items: center;
+      font-size: 12px; margin-bottom: 5px;
+    }
+    .past-present-pair .was { color: #dc2626; text-decoration: line-through; opacity: .65; }
+    .past-present-pair .arrow { color: var(--muted); }
+    .past-present-pair .now { color: #16a34a; font-weight: 600; }
+    h2.divider {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: #a8a29e;
+      margin: 16px 0 9px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-list { list-style: none; }
+    .feature-list li {
+      font-size: 12.5px; color: #57534e;
+      padding: 3px 0 3px 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .feature-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+    .feature-list li strong { color: #1c1917; font-weight: 600; }
+
+    /* ── MODULE TABLE ── */
+    .module-table {
+      width: 100%;
+      border-collapse: separate; border-spacing: 0;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      box-shadow: 0 1px 6px rgba(234,88,12,.06);
+    }
+    .module-table th {
+      background: #fff7ed;
+      padding: 11px 16px; text-align: left;
+      font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 2px solid #fcd9b6;
+    }
+    .module-table td { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: #44403c; }
+    .module-table tr:last-child td { border-bottom: none; }
+    .module-table tr:hover td { background: #fffbf7; }
+    .module-name { font-weight: 700; color: #1c1917; display: block; margin-bottom: 2px; }
+    .module-sub { color: var(--muted); font-size: 11px; }
+    .role-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+    .role-pill { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; }
+    .pill-gp      { background: #ede9fe; color: #6d28d9; }
+    .pill-lp      { background: #dbeafe; color: #1d4ed8; }
+    .pill-analyst { background: #fef3c7; color: #b45309; }
+    .pill-founder { background: #dcfce7; color: #15803d; }
+    .pill-angel   { background: #fce7f3; color: #be185d; }
+    .pill-admin   { background: #f1f5f9; color: #475569; }
+
+    /* ── KEY FLOWS ── */
+    .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    .flow-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(234,88,12,.05); }
+    .flow-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; color: #1c1917; }
+    .flow-steps { list-style: none; }
+    .flow-steps li { display: flex; gap: 10px; font-size: 12.5px; color: #57534e; margin-bottom: 8px; line-height: 1.5; }
+    .flow-steps li .step-num {
+      background: #ffedd5; color: #c2410c;
+      font-weight: 700; font-size: 10px;
+      min-width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 28px 48px;
+      border-top: 1px solid var(--border);
+      background: #fff7ed;
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--muted); font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .roles-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+      .hero { padding: 36px 24px 32px; }
+      .container { padding: 0 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Portfolio Visuals</h1>
-  <p>
-    Clear mind map for portfolio architecture: how a fund is created, how LPs are invited and notified,
-    how a company enters the portfolio, how founder/angel/LP/analyst/GP surfaces react, and how the
-    separate meetings module fits in without overwhelming the portfolio map.
-  </p>
-  <nav>
-    <a href="#portfolio-master">1 Portfolio Map</a>
-    <a href="#fund-created">2 Fund Created</a>
-    <a href="#company-added">3 Company Added</a>
-    <a href="#role-reactions">4 Role Reactions</a>
-    <a href="#meetings">5 Meetings</a>
-  </nav>
-</header>
-
-<main>
-
-<section id="portfolio-master">
-  <h2>1. Role Surfaces, Dashboards, and Interlinks</h2>
-  <p class="lead">
-    The portfolio system starts from role dashboards. GP and analyst operate funds and companies,
-    LP and angel get investment-facing views, and founder works through an own-company workspace.
-    Inbox and meetings sit beside these role surfaces.
-  </p>
-
-  <div class="stats">
-    <div class="stat"><b>5</b><span>Tenant roles: GP, analyst, LP, angel investor, founder.</span></div>
-    <div class="stat"><b>3</b><span>Main write moments: fund creation, company addition, investment or round close.</span></div>
-    <div class="stat"><b>4</b><span>Fan-out channels: email, inbox, dashboards, published LP reports.</span></div>
-    <div class="stat"><b>1</b><span>Shared portfolio data layer with role-shaped visibility.</span></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="logo-pill">⬡ Volery · Sourcing Engine</div>
+    <h1>Portfolio Platform<br>Scope Evolution Report</h1>
+    <p>From a single-role portfolio viewer to a full multi-role, multi-module production platform.</p>
   </div>
+</div>
 
-  <div class="diagram-wrap">
-    <div class="mermaid">
-flowchart TB
-  DASH["Role dashboard entry point"]:::core
+<!-- SECTION 1: PAST vs PRESENT -->
+<section>
+  <div class="container">
+    <div class="section-label">§ 01 — Overview</div>
+    <div class="section-title">Past Scope vs. Present Scope</div>
+    <p class="section-desc">What existed before, what is fully implemented today, and what is concretely left to implement — based on actual codebase state.</p>
 
-  DASH --> GPD["GP Dashboard"]:::gp
-  DASH --> AWD["Analyst Workbench"]:::analyst
-  DASH --> LPD["LP Portal"]:::lp
-  DASH --> AHD["Angel Hub"]:::angel
-  DASH --> FSD["Founder Studio"]:::founder
+    <div class="compare-grid">
+      <div class="cell header">Dimension</div>
+      <div class="cell header past-h">Past Scope</div>
+      <div class="cell header pres-h">Present (Implemented)</div>
+      <div class="cell header fut-h">Left to Implement</div>
 
-  GPD --> GPPORT["Portfolio workspace<br/>funds, companies, AI, documents, reports"]:::gp
-  GPD --> GPSIG["Signals and alerts"]:::signal
-  GPD --> GPLP["LP report builder"]:::gp
-  GPD --> GPRR["Raise rounds, invest side"]:::gp
+      <div class="row-group">Architecture &amp; Infrastructure</div>
 
-  AWD --> AP["Portfolio workspace<br/>same operating tabs as GP"]:::analyst
-  AWD --> AF["Funds and companies operations"]:::analyst
-  AWD --> AQ["Approval, MCA, reports, document queues"]:::analyst
-  AWD --> ALC["LP capital tracking"]:::analyst
+      <div class="cell row-label">Roles</div>
+      <div class="cell past">Single role · user-ID based</div>
+      <div class="cell present">6 roles — GP · LP · Analyst · Founder · Angel · Admin</div>
+      <div class="cell future"></div>
 
-  LPD --> LPORT["LP portfolio<br/>fund positions across organizations"]:::lp
-  LPORT --> LFUND["Fund detail<br/>overview, cashflows, holdings, reports"]:::lp
-  LPD --> LCAP["Capital calls<br/>confirm transfer"]:::lp
-  LPD --> LREP["Investor reporting"]:::lp
+      <div class="cell row-label">Auth</div>
+      <div class="cell past">User-ID only · no session management</div>
+      <div class="cell present">Org-ID · JWT · Redis blocklist · brute-force lockout</div>
+      <div class="cell future"></div>
 
-  AHD --> AINV["Angel investments<br/>firms, companies, SPVs"]:::angel
-  AINV --> ACOMP["Company investment detail"]:::angel
-  AINV --> ASPV["SPV detail"]:::angel
-  AHD --> APORT["Angel portfolio<br/>co-investment performance"]:::angel
-  AHD --> ARR["Raise-round invites and responses"]:::angel
+      <div class="cell row-label">Multi-tenancy</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Every data read and write is scoped to the organisation</div>
+      <div class="cell future">Row-level security needs to be enforced per role at the database level — each role should only be able to query the rows they are allowed to see, not just filtered in code</div>
 
-  FSD --> FMC["My companies<br/>founder company list"]:::founder
-  FMC --> FWS["Company workspace<br/>overview, funding, reports, investors"]:::founder
-  FWS --> FTABS["MCA, cap table, documents, team, raise"]:::founder
-  FSD --> FPITCH["Pitch deck"]:::founder
-  FSD --> FMATCH["Investor match"]:::founder
+      <div class="cell row-label">Permissions</div>
+      <div class="cell past">Ad-hoc checks · no audit trail</div>
+      <div class="cell present">Role-based permissions · named guards · tested</div>
+      <div class="cell future"></div>
 
-  DASH --> INBOX["Portfolio inbox<br/>accept and acknowledge actions"]:::reader
-  DASH --> MTG["Meetings<br/>video, recording, transcript, summary"]:::meeting
+      <div class="row-group">Portfolio Module</div>
 
-  classDef core fill:#d97706,stroke:#92400e,stroke-width:4px,color:#ffffff,font-weight:bold
-  classDef gp fill:#fef3c7,stroke:#92400e,color:#171717
-  classDef analyst fill:#dbeafe,stroke:#1e40af,color:#171717
-  classDef lp fill:#dcfce7,stroke:#166534,color:#171717
-  classDef angel fill:#ffedd5,stroke:#9a3412,color:#171717
-  classDef founder fill:#ede9fe,stroke:#5b21b6,color:#171717
-  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
-  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
-  classDef meeting fill:#fce7f3,stroke:#9d174d,color:#171717
+      <div class="cell row-label">Dashboard</div>
+      <div class="cell past">One shared view</div>
+      <div class="cell present">5 role-specific dashboards (GP · Analyst · LP · Founder · Angel)</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Fund Creation</div>
+      <div class="cell past">Basic fund list</div>
+      <div class="cell present">Hard-cap · close dates · GP commitment · LP invite batch</div>
+      <div class="cell future">Mid-fund LP joins — how metrics recalculate when a new investor joins an already active fund · Shareholding redistribution on new capital · Final round close mechanics · LP exit process — how stake is unwound and returns are settled · Fund metrics not refreshing instantly on close (runs monthly only)</div>
+
+      <div class="cell row-label">Company Module</div>
+      <div class="cell past">Name + summary only</div>
+      <div class="cell present">Financials · analytics · AI insights · benchmarks · patents · filings</div>
+      <div class="cell future">Company exit flow — how ownership and returns are calculated when a company exits the portfolio · Shareholding waterfall on exit across GP / LP / Angel · Cap table updates when a new funding round is added · Company metrics not auto-refreshing after an approval is applied (runs monthly only)</div>
+
+      <div class="cell row-label">LP Invites</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Invite lifecycle · INR validation · inbox notifications</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Angel Invites</div>
+      <div class="cell past">None</div>
+      <div class="cell present">SPVs · co-invest · lead-fund · investment snapshots</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Founder Invites</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Multi-company workspace · co-founder roster · MIS · doc requests</div>
+      <div class="cell future">Co-founder invite email content is not finalised yet</div>
+
+      <div class="cell row-label">Reports</div>
+      <div class="cell past">Basic export</div>
+      <div class="cell present">AI-generated LP reports · publish · email · snapshot refresh</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Inbox</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Fund invites · company adds · capital-call alerts · reminders</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">AI Copilot</div>
+      <div class="cell past">Single one-off query</div>
+      <div class="cell present">Portfolio AI · Company AI · conversation history</div>
+      <div class="cell future">Usage limits per organisation are not enforced yet · Variety of answer types needs improvement — responses cover the question but depth and format across different query types needs to be broader</div>
+
+      <div class="row-group">Role Scope Expansion</div>
+
+      <div class="cell row-label">GP</div>
+      <div class="cell past">View portfolio only</div>
+      <div class="cell present">Fund creation · invite orchestration · signals · raise rounds · alerts</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">LP</div>
+      <div class="cell past">No role</div>
+      <div class="cell present">NAV · cashflows · capital calls · LP reports · cross-org portfolio</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Analyst</div>
+      <div class="cell past">No role</div>
+      <div class="cell present">Work queue · MIS compliance · valuation marks · MCA queue · anomaly flags</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Founder</div>
+      <div class="cell past">No role</div>
+      <div class="cell present">Multi-company · MIS submissions · co-founder roster · investor match</div>
+      <div class="cell future">Investor match shows no results — the feature is built but not yet connected to real data · Cap table management needs further work — external investor entries exist but dilution calculations and round-by-round updates are not fully implemented</div>
+
+      <div class="cell row-label">Angel</div>
+      <div class="cell past">No role</div>
+      <div class="cell present">Investments · SPVs · co-invest · raise rounds · lead-fund</div>
+      <div class="cell future"></div>
+
+      <div class="row-group">Modules</div>
+
+      <div class="cell row-label">Meetings</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Video calls · recordings · transcription · AI meeting summary · one-way calendar sync</div>
+      <div class="cell future">Two-way Google Calendar sync not started · In-meeting reactions, background blur, and raise-hand not built yet</div>
+
+      <div class="cell row-label">Network</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Direct messaging · live online presence · unread badges · email relay</div>
+      <div class="cell future"></div>
+
+      <div class="cell row-label">Change Requests</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Approval workflow for MIS · valuation marks · raise-round terms</div>
+      <div class="cell future">Company-level metrics do not refresh automatically after an approval — tied to same monthly schedule gap as Company Module · Cap table change requests (new issuance, ESOP grants, secondary transfers) need further guardrails and end-to-end testing before they are production-safe · Fund metrics are not recalculated inline when an approval is applied — currently refreshed on the monthly schedule only</div>
+
+      <div class="cell row-label">MCA</div>
+      <div class="cell past">None</div>
+      <div class="cell present">Data fetch from MCA</div>
+      <div class="cell future"></div>
+
     </div>
-  </div>
-
-  <div class="grid">
-    <div class="card"><span class="tag gp">GP</span><h3>Fund operator</h3><p>Creates and manages funds, companies, reports, LP communication, signals, and raise-round investment views.</p></div>
-    <div class="card"><span class="tag analyst">Analyst</span><h3>Operations and review</h3><p>Works through portfolio tabs and analyst queues for approvals, reports, documents, MCA, LP capital, and company review.</p></div>
-    <div class="card"><span class="tag lp">LP</span><h3>Fund-position reader</h3><p>Sees commitments, cashflows, holdings, capital calls, and published reports for funds where membership exists.</p></div>
-    <div class="card"><span class="tag angel">Angel</span><h3>Co-investment reader</h3><p>Sees co-investment performance, company detail, SPV detail, lead fund context, and raise-round opportunities.</p></div>
-    <div class="card"><span class="tag founder">Founder</span><h3>Own-company workspace</h3><p>Sees only companies connected through founder ownership and updates reports, funding, investors, documents, and raise status.</p></div>
+    <p style="margin-top:16px; font-size:12.5px; color:#92400e; background:#fff7ed; border:1px solid #fcd9b6; border-left:3px solid #ea580c; border-radius:8px; padding:10px 14px;">
+      📝 <strong>Note:</strong> All features listed above are based on current implementation scope. After full implementation, each flow must be tested manually end-to-end before sign-off.
+    </p>
   </div>
 </section>
 
-<section id="fund-created">
-  <h2>2. Fund Created Flow</h2>
-  <p class="lead">
-    A new fund starts from GP/analyst portfolio write access. The system creates the fund, invalidates fund
-    cache, provisions LP invite/membership records, creates LP inbox actions, sends LP email, and notifies
-    analysts so the operational team sees the new fund immediately.
-  </p>
+<!-- SECTION 2: ROLE PROFILES -->
+<section>
+  <div class="container">
+    <div class="section-label">§ 02 — Role Profiles</div>
+    <div class="section-title">What Each Role Can Do</div>
+    <p class="section-desc">LP, Analyst, Founder, and Angel are all new roles — none existed in the initial scope.</p>
 
-  <div class="diagram-wrap">
-    <div class="mermaid">
+    <div class="roles-grid">
+
+      <!-- GP -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:100%; background: linear-gradient(90deg, #6366f1, #8b5cf6);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#ede9fe;">💼</div>
+          <div class="info">
+            <h3 style="color:#6d28d9;">General Partner (GP)</h3>
+            <p>Fund manager · 44 permissions · GPDashboard</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">View portfolio only</span><span class="arrow">→</span><span class="now">Full fund lifecycle management</span></div>
+          <div class="past-present-pair"><span class="was">No invite flows</span><span class="arrow">→</span><span class="now">LP / Angel / Founder orchestration</span></div>
+          <div class="past-present-pair"><span class="was">No financial depth</span><span class="arrow">→</span><span class="now">TVPI · DPI · RVPI · IRR · MOIC · burn · runway</span></div>
+
+          <h2 class="divider">Fund Operations</h2>
+          <ul class="feature-list">
+            <li><strong>Fund Creation</strong> — hard-cap, close dates, LP invite batch</li>
+            <li><strong>LP Management</strong> — add/revoke, committed INR, equalization interest</li>
+            <li><strong>Company Addition</strong> — triggers inbox across all 5 roles</li>
+            <li><strong>Capital Activity</strong> — deployments, distributions, call scheduling</li>
+          </ul>
+
+          <h2 class="divider">Portfolio Intelligence</h2>
+          <ul class="feature-list">
+            <li><strong>LP Reports</strong> — AI-generated quarterly reports, publish &amp; email</li>
+            <li><strong>Signals &amp; Alerts</strong> — anomaly detection, proactive insights, saved queries</li>
+            <li><strong>Raise Rounds</strong> — investor discovery, angel invites, round publication</li>
+            <li><strong>Portfolio AI</strong> — NL queries over entire portfolio</li>
+            <li><strong>Company AI</strong> — per-company intelligence &amp; evidence synthesis</li>
+          </ul>
+
+          <h2 class="divider">Platform Tools</h2>
+          <ul class="feature-list">
+            <li><strong>Meetings</strong> — video, recordings, AI summary, calendar sync</li>
+            <li><strong>Network</strong> — DMs, real-time presence, member reports</li>
+            <li><strong>Email History</strong> — transactional email audit log</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ANALYST -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:92%; background: linear-gradient(90deg, #f59e0b, #fb923c);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#fef3c7;">🔬</div>
+          <div class="info">
+            <h3 style="color:#b45309;">Analyst</h3>
+            <p>Operations &amp; compliance · 37 permissions · AnalystWorkbench</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">Role did not exist</span><span class="arrow">→</span><span class="now">Full operational workbench</span></div>
+          <div class="past-present-pair"><span class="was">No compliance tools</span><span class="arrow">→</span><span class="now">MIS review · valuation marks · MCA queue</span></div>
+
+          <h2 class="divider">Work Queue</h2>
+          <ul class="feature-list">
+            <li><strong>Approval Queue</strong> — portfolio additions awaiting sign-off</li>
+            <li><strong>MCA Queue</strong> — Ministry of Corporate Affairs document verification</li>
+            <li><strong>Close Rounds</strong> — raise-round closure, tranche pre-fill</li>
+            <li><strong>Anomaly Flags</strong> — AI-flagged MIS discrepancies, triage workflow</li>
+          </ul>
+
+          <h2 class="divider">MIS &amp; Compliance</h2>
+          <ul class="feature-list">
+            <li><strong>MIS Review</strong> — approve/reject founder submissions</li>
+            <li><strong>Valuation Queue</strong> — draft marks review, 2-GP auto-approve rule</li>
+            <li><strong>Document Requests</strong> — issue to companies, track fulfillment</li>
+            <li><strong>LP Capital</strong> — per-LP allocation view across all funds</li>
+          </ul>
+
+          <h2 class="divider">Fund &amp; Company Management</h2>
+          <ul class="feature-list">
+            <li><strong>Funds</strong> — create, update, full metrics view</li>
+            <li><strong>Companies</strong> — full management, valuations</li>
+            <li><strong>Reports</strong> — MIS oversight, anomaly flag review</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LP -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:78%; background: linear-gradient(90deg, #0ea5e9, #38bdf8);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#dbeafe;">📊</div>
+          <div class="info">
+            <h3 style="color:#1d4ed8;">Limited Partner (LP)</h3>
+            <p>Investor portal · 13 permissions · LPPortal</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">Role did not exist</span><span class="arrow">→</span><span class="now">Complete LP investor portal</span></div>
+          <div class="past-present-pair"><span class="was">No fund position tracking</span><span class="arrow">→</span><span class="now">Per-fund NAV · MOIC · IRR · cashflows</span></div>
+
+          <h2 class="divider">Fund Position</h2>
+          <ul class="feature-list">
+            <li><strong>Fund Overview</strong> — NAV, MOIC, IRR, capital deployed per fund</li>
+            <li><strong>Cash Flows</strong> — cashflow timeline per fund</li>
+            <li><strong>Holdings</strong> — shaped company list within fund</li>
+            <li><strong>Cross-Org Portfolio</strong> — aggregate statement across funds &amp; orgs</li>
+          </ul>
+
+          <h2 class="divider">Capital &amp; Reports</h2>
+          <ul class="feature-list">
+            <li><strong>Capital Calls</strong> — notifications, wire transfer confirmation</li>
+            <li><strong>LP Reports</strong> — published quarterly reports, PDF download</li>
+            <li><strong>Fund Invitations</strong> — receive &amp; accept fund membership</li>
+            <li><strong>Inbox</strong> — invites, company notifications, reminders</li>
+          </ul>
+
+          <h2 class="divider">Network</h2>
+          <ul class="feature-list">
+            <li><strong>Network</strong> — direct messaging within org</li>
+            <li><strong>Meetings</strong> — schedule, join, view recordings</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOUNDER -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:85%; background: linear-gradient(90deg, #10b981, #34d399);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#dcfce7;">🚀</div>
+          <div class="info">
+            <h3 style="color:#15803d;">Founder</h3>
+            <p>Company workspace · 13 permissions · FounderStudio</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">Role did not exist</span><span class="arrow">→</span><span class="now">Multi-company workspace</span></div>
+          <div class="past-present-pair"><span class="was">No data exchange</span><span class="arrow">→</span><span class="now">Analyst ↔ Founder communications</span></div>
+
+          <h2 class="divider">My Companies Workspace</h2>
+          <ul class="feature-list">
+            <li><strong>Multi-Company</strong> — separate workspace per owned company</li>
+            <li><strong>Profile Edit</strong> — description, website, sector</li>
+            <li><strong>Co-Founder Roster</strong> — invite co-founders, manage lifecycle</li>
+            <li><strong>Funding Summary</strong> — rounds history, total funding</li>
+            <li><strong>Fund Linkages</strong> — VC funds holding each company</li>
+            <li><strong>Cap Table</strong> — external investor CRUD, ownership structure</li>
+          </ul>
+
+          <h2 class="divider">MIS &amp; Data Exchange</h2>
+          <ul class="feature-list">
+            <li><strong>MIS Submission</strong> — submit management info (triggers analyst review)</li>
+            <li><strong>Anomaly Flags</strong> — view analyst-raised discrepancy flags</li>
+            <li><strong>Document Requests</strong> — receive from GP/analyst, fulfill with uploads</li>
+            <li><strong>Previous Submissions</strong> — full MIS history &amp; statuses</li>
+          </ul>
+
+          <h2 class="divider">Raise Round &amp; Investor Match</h2>
+          <ul class="feature-list">
+            <li><strong>Raise Rounds</strong> — create, publish, invite angels, track responses</li>
+            <li><strong>Investor Match</strong> — browse VC funds on platform</li>
+            <li><strong>Network + Meetings</strong> — DMs, video meetings</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ANGEL -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:82%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#fce7f3;">😇</div>
+          <div class="info">
+            <h3 style="color:#be185d;">Angel Investor</h3>
+            <p>Co-investment &amp; deal discovery · 18 permissions · AngelHub</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">Role did not exist</span><span class="arrow">→</span><span class="now">Full angel investment dashboard</span></div>
+          <div class="past-present-pair"><span class="was">No investment tracking</span><span class="arrow">→</span><span class="now">SPVs · co-invest · lead-fund · deal economics</span></div>
+
+          <h2 class="divider">Investment Dashboard</h2>
+          <ul class="feature-list">
+            <li><strong>My Investments</strong> — co-invested companies: fund, round, valuation</li>
+            <li><strong>Investment Detail</strong> — shareholding %, dilution %, deal snapshot</li>
+            <li><strong>SPVs</strong> — browse structures, preferred returns</li>
+            <li><strong>Lead Fund</strong> — identify lead fund per investment</li>
+            <li><strong>Co-Investors</strong> — other angels in same round</li>
+            <li><strong>Cross-Org</strong> — ecosystem visibility across orgs</li>
+          </ul>
+
+          <h2 class="divider">Raise Rounds &amp; Deals</h2>
+          <ul class="feature-list">
+            <li><strong>Discover Rounds</strong> — public raise rounds from founders</li>
+            <li><strong>Private Invites</strong> — receive &amp; respond to private invitations</li>
+            <li><strong>Investment Requests</strong> — post investment interest</li>
+          </ul>
+
+          <h2 class="divider">Network &amp; Comms</h2>
+          <ul class="feature-list">
+            <li><strong>Portfolio View</strong> — fund-scoped company list</li>
+            <li><strong>Inbox</strong> — round invitations, company notifications</li>
+            <li><strong>Network</strong> — direct messaging within org</li>
+            <li><strong>Meetings</strong> — schedule, join, recordings</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SYSTEM ADMIN -->
+      <div class="role-card">
+        <div class="role-scope-bar"><div class="fill" style="width:45%; background: linear-gradient(90deg, #64748b, #94a3b8);"></div></div>
+        <div class="role-header">
+          <div class="role-icon" style="background:#f1f5f9;">🛡️</div>
+          <div class="info">
+            <h3 style="color:#475569;">System Admin</h3>
+            <p>Platform operator · cross-tenant · /admin</p>
+          </div>
+        </div>
+        <div class="role-body">
+          <div class="past-present-pair"><span class="was">No platform admin</span><span class="arrow">→</span><span class="now">Cross-tenant org management</span></div>
+
+          <h2 class="divider">Platform Management</h2>
+          <ul class="feature-list">
+            <li><strong>Organizations</strong> — CRUD orgs, lifecycle management</li>
+            <li><strong>Access Requests</strong> — approve / deny org access</li>
+            <li><strong>Admin Grants</strong> — grant / revoke admin permissions</li>
+            <li><strong>Email Preview</strong> — preview templates for any org</li>
+            <li><strong>Not self-registerable</strong> — platform-operated only</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: KEY FLOWS -->
+<section>
+  <div class="container">
+    <div class="section-label">§ 03 — Business Flows</div>
+    <div class="section-title">Key End-to-End Flows</div>
+    <p class="section-desc">Major cross-role flows that did not exist in the initial scope.</p>
+
+    <div class="flow-grid">
+
+      <div class="flow-card">
+        <h4>🏦 Fund Creation → LP Invites</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>GP creates fund with hard-cap, GP commitment, first/final close dates.</li>
+          <li><span class="step-num">2</span>System validates: total LP committed + GP ≤ hard-cap.</li>
+          <li><span class="step-num">3</span>Fund created; inbox notifications sent to all GPs &amp; analysts.</li>
+          <li><span class="step-num">4</span>Per LP invite: existing member → FundMembership; new user → email invite.</li>
+          <li><span class="step-num">5</span>LP accepts → equalization interest computed, close type recorded.</li>
+          <li><span class="step-num">6</span>Final-close gate: new member adds blocked after final_close_at.</li>
+        </ul>
+      </div>
+
+      <div class="flow-card">
+        <h4>🏢 Company Addition → Multi-Role Notifications</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>GP or Analyst adds a company to a fund.</li>
+          <li><span class="step-num">2</span>Company and PortfolioCompany records created.</li>
+          <li><span class="step-num">3</span>Inbox items created for: Founder, co-investing Angels, top LP, all Analysts, all GPs.</li>
+          <li><span class="step-num">4</span>Founder receives email invite if not already a platform member.</li>
+          <li><span class="step-num">5</span>Each role sees a role-appropriate action in their Inbox.</li>
+        </ul>
+      </div>
+
+      <div class="flow-card">
+        <h4>📋 MIS Submission — Founder → Analyst</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>Founder submits MIS data for their company.</li>
+          <li><span class="step-num">2</span>Change Request created (pending); analyst alerted immediately.</li>
+          <li><span class="step-num">3</span>Analyst reviews in the MIS Review Queue.</li>
+          <li><span class="step-num">4</span>Approve → MIS record created, MOIC/burn recomputed, anomaly check runs.</li>
+          <li><span class="step-num">5</span>Reject → Founder notified, can resubmit with corrections.</li>
+          <li><span class="step-num">6</span>Anomaly flags surface on Founder's own company dashboard.</li>
+        </ul>
+      </div>
+
+      <div class="flow-card">
+        <h4>📣 Raise Round — Founder → Angel → GP</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>Founder creates a raise round (draft) with target amount and close date.</li>
+          <li><span class="step-num">2</span>Founder publishes → core fields locked via change-requests engine.</li>
+          <li><span class="step-num">3</span>Angels browse public rounds or receive private invites.</li>
+          <li><span class="step-num">4</span>Angel responds: interested / meeting_requested → founder notified.</li>
+          <li><span class="step-num">5</span>GP/Analyst reviews the responded-invites list.</li>
+          <li><span class="step-num">6</span>Analyst closes round → Investment + CapitalActivity created, fund metrics recomputed.</li>
+        </ul>
+      </div>
+
+      <div class="flow-card">
+        <h4>📹 Meetings → Transcript → AI Summary</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>Any role creates a meeting; invitees auto-notified by email.</li>
+          <li><span class="step-num">2</span>LiveKit room opens; participants join via JWT room token.</li>
+          <li><span class="step-num">3</span>Recording saved to S3 automatically.</li>
+          <li><span class="step-num">4</span>Transcript generated asynchronously in the background.</li>
+          <li><span class="step-num">5</span>LLM produces a concise meeting summary.</li>
+          <li><span class="step-num">6</span>1h reminder email sent; Google Calendar sync runs best-effort.</li>
+        </ul>
+      </div>
+
+      <div class="flow-card">
+        <h4>📊 LP Portal — Fund Position View</h4>
+        <ul class="flow-steps">
+          <li><span class="step-num">1</span>LP logs in and lands on the LPPortal dashboard.</li>
+          <li><span class="step-num">2</span>Views all member funds: NAV, MOIC, IRR at a glance.</li>
+          <li><span class="step-num">3</span>Drills into a fund: cashflows, holdings, LP analytics.</li>
+          <li><span class="step-num">4</span>Receives capital-call notification → confirms wire transfer.</li>
+          <li><span class="step-num">5</span>Downloads the published LP quarterly report as PDF.</li>
+          <li><span class="step-num">6</span>Cross-org statement aggregates positions across all funds &amp; orgs.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: FLOW DIAGRAMS -->
+<section>
+  <div class="container">
+    <div class="section-label">§ 04 — Flow Diagrams</div>
+    <div class="section-title">Fund Creation &amp; Company Addition Flows</div>
+    <p class="section-desc">Visual walkthrough of the two core write flows and how each role is notified.</p>
+
+    <!-- Fund Created Flow -->
+    <div style="margin-bottom: 40px;">
+      <h3 style="font-size:16px; font-weight:700; color:#1c1917; margin-bottom:6px;">Fund Created Flow</h3>
+      <p style="font-size:13px; color:#78716c; margin-bottom:16px;">A new fund starts from GP/analyst portfolio write access. The system creates the fund, invalidates the fund cache, provisions LP invite and membership records, creates LP inbox actions, sends LP email, and notifies analysts.</p>
+
+      <div style="background:#ffffff; border:1px solid #f0ddd0; border-radius:12px; overflow:auto; padding:24px;">
+        <div class="mermaid" style="min-width:900px;">
 flowchart TB
   START["GP or analyst creates fund"]:::gp
   API["Save fund"]:::api
   LIMIT["Plan limit check"]:::api
   FUND["Fund becomes active"]:::data
-  CACHE["Fund cache invalidated"]:::signal
 
-  START --> API --> LIMIT --> FUND --> CACHE
+  START --> API --> LIMIT --> FUND
 
   subgraph LP_FLOW["LP invite and membership flow"]
     direction LR
-    LPINV["LP invite details<br/>email, name, commitment"]:::lp
+    LPINV["LP invite details — email, name, commitment"]:::lp
     EXISTING["Existing active LP?"]:::lp
-    ACTIVE["Create or reactivate<br/>fund membership"]:::data
+    ACTIVE["Create or reactivate fund membership"]:::data
     LINK["Create secure invite link"]:::data
-    LPINBOX["LP inbox item<br/>accept fund invite"]:::reader
+    LPINBOX["LP inbox item — accept fund invite"]:::reader
     LPEMAIL["LP invite email"]:::reader
     LPPORTAL["LP sees fund portal"]:::lp
   end
@@ -346,8 +744,8 @@ flowchart TB
   subgraph ANALYST_FLOW["Analyst awareness"]
     direction LR
     ALOOKUP["Find active analysts"]:::analyst
-    AINBOX["Analyst inbox<br/>acknowledge new fund"]:::reader
-    AEMAIL["Analyst email<br/>new fund update"]:::reader
+    AINBOX["Analyst inbox — acknowledge new fund"]:::reader
+    AEMAIL["Analyst email — new fund update"]:::reader
     ADASH["Analyst workbench updates"]:::analyst
   end
 
@@ -359,33 +757,61 @@ flowchart TB
   classDef api fill:#fff7ed,stroke:#d97706,color:#171717
   classDef data fill:#f8fafc,stroke:#64748b,color:#171717
   classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
-  classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:16px;">
+        <div style="background:#fff; border:1px solid #f0ddd0; border-radius:10px; padding:14px;">
+          <span style="background:#fef3c7; color:#92400e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; text-transform:uppercase;">GP / Analyst</span>
+          <p style="font-size:13px; color:#44403c; margin:10px 0 0;">Creates the fund. Fund rows become the context for companies, LP commitments, reports, and metrics.</p>
+        </div>
+        <div style="background:#fff; border:1px solid #f0ddd0; border-radius:10px; padding:14px;">
+          <span style="background:#dcfce7; color:#166534; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; text-transform:uppercase;">LP</span>
+          <p style="font-size:13px; color:#44403c; margin:10px 0 0;">Existing LPs get activated directly. New LPs receive a join token and inbox item to accept the fund invite.</p>
+        </div>
+        <div style="background:#fff; border:1px solid #f0ddd0; border-radius:10px; padding:14px;">
+          <span style="background:#dbeafe; color:#1e40af; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; text-transform:uppercase;">Analyst</span>
+          <p style="font-size:13px; color:#44403c; margin:10px 0 0;">Active analysts get an inbox acknowledgement plus a fund update email so the operations team can track the new fund.</p>
+        </div>
+      </div>
+
+      <!-- Fund Creation: Left to implement -->
+      <div style="margin-top:18px; background:#fffbf7; border:1px solid #fcd9b6; border-left:3px solid #ea580c; border-radius:8px; padding:14px 18px;">
+        <p style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#c2410c; margin-bottom:10px;">Left to Implement — Fund Creation</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px;">
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Mid-fund LP joins</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">When a new LP joins a fund that is already active, the system needs to recalculate metrics, equalization interest, and ownership splits across all existing members.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Shareholding redistribution</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">When new capital is added to an existing fund, each LP's percentage holding needs to be recalculated and reflected across reports and dashboards.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Final round close mechanics</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">When the fund hits its hard cap and closes, all metrics — TVPI, DPI, RVPI, IRR — need to be finalised and locked. Currently these refresh on a monthly schedule, not instantly on close.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">LP exit process</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">If an LP exits the fund, how their committed capital and returns are settled, how their stake is distributed to remaining members, and how the cap table and reports are updated — this full flow is not yet built.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="grid">
-    <div class="card"><span class="tag gp">GP / Analyst</span><h3>Creates the fund</h3><p>Fund rows are created through portfolio write routes and become the fund context for companies, LP commitments, reports, and metrics.</p></div>
-    <div class="card"><span class="tag lp">LP</span><h3>Receives invite and inbox action</h3><p>Existing LPs can be activated directly. New LPs receive a join token and an inbox item that accepts the fund invite.</p></div>
-    <div class="card"><span class="tag analyst">Analyst</span><h3>Gets notified</h3><p>Active analysts get an inbox acknowledgement plus a fund update email so operations can track the newly created fund.</p></div>
-  </div>
-</section>
+    <!-- Company Added Flow -->
+    <div>
+      <h3 style="font-size:16px; font-weight:700; color:#1c1917; margin-bottom:6px;">Company Added Flow</h3>
+      <p style="font-size:13px; color:#78716c; margin-bottom:16px;">A company is first added as a portfolio company in pending founder activation. The system then fans out to founder onboarding, angel co-investor invitations, top-LP notification, analyst notifications, and fund metric cache invalidation.</p>
 
-<section id="company-added">
-  <h2>3. Company Added Flow</h2>
-  <p class="lead">
-    A company is first added as a portfolio company in pending founder activation. From there the system fans
-    out to founder onboarding, angel co-investor invitations, top-LP notification, analyst notifications,
-    dashboard refresh, optional initial investment, valuation, and fund metric cache invalidation.
-  </p>
-
-  <div class="diagram-wrap">
-    <div class="mermaid">
+      <div style="background:#ffffff; border:1px solid #f0ddd0; border-radius:12px; overflow:auto; padding:24px;">
+        <div class="mermaid" style="min-width:1100px;">
 flowchart LR
   ADD["GP or analyst adds company"]:::gp
   API["Save company"]:::api
-  COMPANY["Company record<br/>created or reused"]:::data
-  PC["Portfolio company<br/>waiting for founder activation"]:::data
-  OPTIONAL["Optional initial investment<br/>valuation + mark"]:::data
+  COMPANY["Company record — created or reused"]:::data
+  PC["Portfolio company — waiting for founder activation"]:::data
+  OPTIONAL["Optional initial investment — valuation and mark"]:::data
   CACHE["Invalidate fund metrics cache"]:::signal
 
   ADD --> API --> COMPANY --> PC
@@ -394,13 +820,13 @@ flowchart LR
 
   subgraph FOUNDER["Founder onboarding"]
     direction TB
-    FI["Founder invitation<br/>founder and cofounders"]:::founder
+    FI["Founder invitation — founder and cofounders"]:::founder
     FEM["Founder invite email"]:::reader
-    FIN["Founder inbox<br/>accept company invite"]:::reader
+    FIN["Founder inbox — accept company invite"]:::reader
     OWN["Founder ownership link"]:::founder
-    REL["Founder relationship<br/>portfolio member"]:::founder
+    REL["Founder relationship — portfolio member"]:::founder
     ACTIVE["Company becomes active"]:::data
-    FVIEW["Founder sees<br/>My Companies workspace"]:::founder
+    FVIEW["Founder sees My Companies workspace"]:::founder
   end
 
   PC --> FI --> FEM
@@ -408,9 +834,9 @@ flowchart LR
 
   subgraph LP["LP notification and visibility"]
     direction TB
-    TOP["Top LP selected<br/>highest active commitment"]:::lp
-    TOPMAIL["Top LP email<br/>company added"]:::reader
-    TOPINBOX["Top LP inbox<br/>acknowledge"]:::reader
+    TOP["Top LP selected — highest active commitment"]:::lp
+    TOPMAIL["Top LP email — company added"]:::reader
+    TOPINBOX["Top LP inbox — acknowledge"]:::reader
     HOLDINGS["LP fund holdings update"]:::lp
     REPORTS["Published LP reports include company"]:::lp
   end
@@ -423,7 +849,7 @@ flowchart LR
     direction TB
     AINV["Angel invite link"]:::angel
     AEMAIL["Angel co-investor email"]:::reader
-    AINBOX["Angel inbox<br/>accept"]:::reader
+    AINBOX["Angel inbox — accept"]:::reader
     AMEM["Angel fund membership"]:::angel
     AVIEW["Angel investment views update"]:::angel
   end
@@ -434,10 +860,10 @@ flowchart LR
   subgraph OPS["GP and Analyst operations"]
     direction TB
     LIST["Portfolio company list"]:::gp
-    DETAIL["Company detail + AI + docs"]:::gp
+    DETAIL["Company detail — AI and docs"]:::gp
     ANALYSTMAIL["Analyst company-added email"]:::reader
-    ANALYSTINBOX["Analyst inbox<br/>founder activation pending"]:::reader
-    QUEUES["Analyst queues<br/>reports, docs, MCA, approvals"]:::analyst
+    ANALYSTINBOX["Analyst inbox — founder activation pending"]:::reader
+    QUEUES["Analyst queues — reports, docs, MCA, approvals"]:::analyst
   end
 
   PC --> LIST --> DETAIL
@@ -454,147 +880,67 @@ flowchart LR
   classDef data fill:#f8fafc,stroke:#64748b,color:#171717
   classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
   classDef signal fill:#fee2e2,stroke:#991b1b,color:#171717
+        </div>
+      </div>
+
+      <!-- Company Module: Left to implement -->
+      <div style="margin-top:18px; background:#fffbf7; border:1px solid #fcd9b6; border-left:3px solid #ea580c; border-radius:8px; padding:14px 18px;">
+        <p style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#c2410c; margin-bottom:10px;">Left to Implement — Company Module</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px;">
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Company exit flow</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">When a company exits the portfolio (acquisition, IPO, write-off), how ownership percentages, MOIC, and final returns are calculated and recorded across all stakeholders — GP, LP, and angel — is not yet built.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Shareholding waterfall on exit</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">On an exit event, returns need to flow through a waterfall — preferred returns to LPs first, then GP carry, then remaining to angels and common holders. This distribution logic is not yet implemented.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Cap table on new funding rounds</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">When a company raises a new external round, the cap table needs to reflect dilution for existing holders and add new investor rows. This update flow needs to be connected end-to-end.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Metrics refresh on approval</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">After an MIS submission is approved, company-level metrics should update immediately. Currently they only refresh on the monthly schedule — the instant refresh path is not yet wired.</p>
+          </div>
+          <div>
+            <p style="font-size:12.5px; font-weight:600; color:#1c1917; margin:0 0 3px;">Add company process improvements</p>
+            <p style="font-size:12px; color:#57534e; margin:0;">The company addition flow needs guardrails — duplicate company checks, sector and stage validation, and a clearer activation handoff between GP and founder before the company is marked live in the fund.</p>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
-<section id="role-reactions">
-  <h2>4. Role Reaction Map</h2>
-  <p class="lead">
-    Use this table to explain what each role sees when the fund or company lifecycle changes. GP and analyst
-    operate the portfolio. LP and angel receive scoped investment views. Founder receives only own-company
-    workspaces after acceptance.
-  </p>
-
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Scenario</th>
-          <th>GP</th>
-          <th>Analyst</th>
-          <th>LP</th>
-          <th>Angel</th>
-          <th>Founder</th>
-          <th>Main shared systems</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Fund created</td>
-          <td>Creates active fund and selects fund context in portfolio.</td>
-          <td>Receives inbox/email and can operate the fund in analyst surfaces.</td>
-          <td>Receives invite email and inbox accept action; sees fund after membership.</td>
-          <td>No direct effect until invited as co-investor or member.</td>
-          <td>No direct effect until a company ownership link exists.</td>
-          <td>Fund record, fund membership, invite links, inbox items, email dispatcher, cache invalidation.</td>
-        </tr>
-        <tr>
-          <td>Company added</td>
-          <td>Sees company in portfolio list/detail and can manage company context.</td>
-          <td>Receives notifications and can review queues for docs, MCA, reports, approvals.</td>
-          <td>Top LP gets email/inbox; LP holdings and reports reflect the company when published.</td>
-          <td>Gets invite/email/inbox if added as co-investor; views update after membership.</td>
-          <td>Gets founder invite/email/inbox; workspace appears after acceptance.</td>
-          <td>Company record, portfolio company record, founder invitations, role invites, inbox, email, optional investment and valuation.</td>
-        </tr>
-        <tr>
-          <td>Investment or round close</td>
-          <td>KPIs, MOIC, reports, company detail, and portfolio AI update.</td>
-          <td>Approval queues clear or change; valuation/report/capital views refresh.</td>
-          <td>NAV, TVPI, DPI, IRR, cashflows, holdings, and reports update by fund.</td>
-          <td>Co-investment cards, SPV/detail pages, and activity feeds update.</td>
-          <td>Funding history, investors, cap table, and raise status update.</td>
-          <td>Investments, valuation marks, ownership snapshots, fund metric recompute, LP report refresh, dashboards.</td>
-        </tr>
-        <tr>
-          <td>MIS, documents, signals</td>
-          <td>Sees anomalies, documents, reports, alerts, and operational KPIs.</td>
-          <td>Reviews submissions, document requests, anomalies, and approval outcomes.</td>
-          <td>Sees only approved/reportable outputs through LP reporting.</td>
-          <td>Sees only scoped co-investment activity and allowed document attention.</td>
-          <td>Submits MIS/documents and sees own-company action requests.</td>
-          <td>Change requests, MIS submissions, documents, anomaly alerts, dashboard feeds, email notifications.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="meetings">
-  <h2>5. Meetings Module, Simplified</h2>
-  <p class="lead">
-    Meetings is separate from portfolio but uses the same five-role tenant context. Keep the meeting story
-    simple for presentation: create meeting, join video panel, record to S3, generate transcript, generate
-    AI summary, email the recap to participants.
-  </p>
-
-  <div class="diagram-wrap">
-    <div class="mermaid">
-flowchart LR
-  CREATE["Create meeting"]:::meeting
-  INVITE["Invite allowed roles<br/>same-org invite matrix"]:::meeting
-  ROOM["Video panel<br/>LiveKit room"]:::meeting
-  RECORD["Recording<br/>LiveKit Egress"]:::meeting
-  S3["Store MP4<br/>S3 bucket"]:::data
-  TRANSCRIPT["AI transcript<br/>AssemblyAI"]:::reader
-  SUMMARY["AI summary<br/>decisions + action items"]:::reader
-  EMAIL["Summary email<br/>organizer + joined participants"]:::reader
-  VIEW["Meeting detail<br/>recording, transcript, summary"]:::meeting
-
-  CREATE --> INVITE --> ROOM --> RECORD --> S3 --> TRANSCRIPT --> SUMMARY --> EMAIL
-  SUMMARY --> VIEW
-  S3 --> VIEW
-
-  classDef meeting fill:#fce7f3,stroke:#9d174d,color:#171717
-  classDef reader fill:#d1fae5,stroke:#065f46,color:#171717
-  classDef data fill:#f8fafc,stroke:#64748b,color:#171717
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="card"><span class="tag meeting">Create</span><h3>Meeting shell</h3><p>All five roles can use meetings, but invite targets are controlled by role rules.</p></div>
-    <div class="card"><span class="tag meeting">Join</span><h3>Video panel</h3><p>LiveKit powers the room. Users join from the meeting room page with a minted join token.</p></div>
-    <div class="card"><span class="tag reader">After call</span><h3>Transcript and summary</h3><p>Recording lands in S3, transcript is generated, AI summary is created, and recap email is sent.</p></div>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  Standalone visual file: <code>visuals.html</code>. Portfolio context is detailed; meetings are intentionally simplified.
-</footer>
+<!-- FOOTER -->
+<div class="footer">
+  <div>⬡ Volery · Sourcing Engine — Portfolio Scope Report</div>
+  <div>Prepared June 2026</div>
+</div>
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-
   mermaid.initialize({
     startOnLoad: true,
     theme: 'default',
-    flowchart: {
-      curve: 'basis',
-      useMaxWidth: true,
-      htmlLabels: true,
-      nodeSpacing: 42,
-      rankSpacing: 54,
-      padding: 12,
-    },
+    flowchart: { curve: 'basis', useMaxWidth: true, htmlLabels: true, nodeSpacing: 42, rankSpacing: 54, padding: 12 },
     themeVariables: {
-      fontFamily: '-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif',
+      fontFamily: "'Segoe UI', system-ui, sans-serif",
       fontSize: '12px',
       primaryColor: '#fef3c7',
       primaryTextColor: '#171717',
       primaryBorderColor: '#92400e',
-      lineColor: '#66645f',
+      lineColor: '#78716c',
       background: '#ffffff',
       mainBkg: '#ffffff',
-      nodeBorder: '#171717',
-      clusterBkg: '#fafaf7',
-      clusterBorder: '#dedbd2',
-      titleColor: '#171717',
+      clusterBkg: '#fffbf7',
+      clusterBorder: '#f0ddd0',
       edgeLabelBackground: '#ffffff',
     },
   });
 </script>
+
 </body>
 </html>
